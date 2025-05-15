@@ -1,139 +1,357 @@
 import React, { useState, useEffect } from 'react';
 import { CharacterParameters } from '../../types/parameters';
 import { PromptPreset, PresetCategory } from '../../types/preset';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 import './PromptGenerator.css';
 
-// Default character presets
+// Sample presets for display purposes
 const defaultPresets: PromptPreset[] = [
   {
     id: '1',
     name: 'Fantasy Warrior',
-    prompt: 'A tall, muscular human warrior with long braided brown hair, strong square face, sharp blue eyes, with battle scars on left cheek. Wearing plate armor, leather boots, and a red cape. Standing in a battle stance, with one hand on sword hilt, determined expression. Fantasy art style, dramatic lighting.',
-    style: 'detailed',
     category: 'character',
-    tags: ['fantasy', 'warrior', 'armor', 'battle'],
-    description: 'A classic fantasy warrior ready for battle',
+    prompt: 'A tall, muscular warrior with long braided hair, wearing ornate plate armor adorned with dragon motifs. Wielding a massive two-handed sword with glowing runes etched into the blade. Standing in a heroic pose against a backdrop of a medieval battlefield at sunset.',
+    style: 'detailed',
+    tags: ['fantasy', 'warrior', 'armor'],
+    isFavorite: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isFavorite: false
+    description: 'Epic fantasy warrior character suitable for book covers or game art.'
   },
   {
     id: '2',
-    name: 'Sci-Fi Engineer',
-    prompt: 'A female, young adult, slim build android with metallic silver skin and blue glowing circuits. Pointed face with large green glowing eyes, short pixelated blue hair. Wearing futuristic jumpsuit, utility belt with tools, and tech gauntlets. Working pose with hands manipulating holographic display. Sci-fi art style, neon lighting.',
+    name: 'Cyberpunk Hacker',
+    category: 'portrait',
+    prompt: 'Close-up portrait of a young Asian woman with neon blue hair and cybernetic eye implants. Multiple holographic displays reflecting in her eyes. Wearing a high-tech jacket with circuitry patterns and a neural interface jack visible at the base of her skull. Backlit by the glow of a futuristic cityscape at night.',
     style: 'detailed',
-    category: 'character',
-    tags: ['sci-fi', 'android', 'futuristic', 'tech'],
-    description: 'A futuristic android engineer in a high-tech environment',
+    tags: ['cyberpunk', 'sci-fi', 'portrait'],
+    isFavorite: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isFavorite: false
+    description: 'Futuristic cyberpunk hacker character with detailed tech elements.'
   },
   {
     id: '3',
-    name: 'Magical Elf',
-    prompt: 'An elf, female, young adult with slender build, fair skin. Oval face with almond emerald eyes, pointed ears, long flowing silver hair with flowers. Wearing elegant forest green robes with golden embroidery, holding a wooden staff with crystal. Serene expression, standing in a magical forest. Fantasy art style, soft magical lighting, mystical aura.',
+    name: 'Elven Ranger',
+    category: 'full-body',
+    prompt: 'A lithe elven ranger with pointed ears and flowing silver hair, dressed in forest-green leather armor and a hooded cloak. Carrying an ornate longbow and a quiver of arrows. Standing alert in a misty ancient forest with shafts of golden sunlight breaking through the canopy.',
     style: 'artistic',
-    category: 'character',
-    tags: ['fantasy', 'elf', 'magic', 'nature'],
-    description: 'An elegant elven spellcaster in harmony with nature',
+    tags: ['fantasy', 'elf', 'ranger'],
+    isFavorite: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isFavorite: false
+    description: 'Mystical elven character in a detailed forest setting.'
   },
   {
     id: '4',
-    name: 'Cyberpunk Hacker',
-    prompt: 'A human, non-binary, young adult with athletic build. Edgy undercut hairstyle with purple and blue neon colors, cybernetic implants on temple. Wearing black leather jacket, ripped jeans, combat boots. Sitting position with neural interface jacked in, focused expression. Cyberpunk art style, neon city background, dramatic lighting with blues and purples.',
-    style: 'detailed',
+    name: 'Space Explorer',
     category: 'character',
-    tags: ['cyberpunk', 'hacker', 'urban', 'tech'],
-    description: 'A streetwise cyberpunk hacker navigating the digital underground',
+    prompt: 'An astronaut in a sleek, futuristic spacesuit with glowing blue accent lights and a transparent helmet. The suit has numerous small thrusters and utility devices attached. Floating in zero gravity against the backdrop of a massive ringed gas giant planet and starfield.',
+    style: 'detailed',
+    tags: ['sci-fi', 'space', 'astronaut'],
+    isFavorite: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isFavorite: false
+    description: 'Detailed sci-fi character design for a deep space explorer.'
   },
   {
     id: '5',
-    name: 'Desert Nomad',
-    prompt: 'A human, male, adult with weathered build. Sun-darkened skin, face partially covered by desert scarf, deep brown eyes. Wearing layered desert robes, head wrap, sturdy boots. Standing on sand dune, surveying horizon, hand shielding eyes. Realistic art style with warm lighting, desert environment at sunset.',
-    style: 'concise',
-    category: 'character',
-    tags: ['desert', 'nomad', 'explorer', 'realistic'],
-    description: 'A seasoned desert traveler surviving in harsh conditions',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    isFavorite: false
-  },
-  {
-    id: '6',
-    name: 'Steampunk Inventor',
-    prompt: 'A human, female, adult with curvy build and olive skin. Round face with goggles on forehead, wild curly hair with copper highlights. Wearing leather apron, striped shirt with rolled sleeves, tool belt. Standing with arms crossed, confident smile, soot marks on cheek. Victorian steampunk art style, workshop background with brass and copper inventions, warm lighting with steam effects.',
-    style: 'detailed',
-    category: 'character',
-    tags: ['steampunk', 'inventor', 'victorian', 'industrial'],
-    description: 'An innovative steampunk inventor with revolutionary ideas',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    isFavorite: false
-  },
-  {
-    id: '7',
-    name: 'Modern Detective',
-    prompt: 'A human, male, middle-aged with average build. Tired eyes, stubble, furrowed brow. Wearing rumpled trench coat, loose tie, shoulder holster. Standing examining evidence, thoughtful expression. Film noir style, high contrast lighting, rainy city background.',
-    style: 'concise',
-    category: 'portrait',
-    tags: ['noir', 'detective', 'modern', 'mystery'],
-    description: 'A hardboiled detective solving impossible cases',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    isFavorite: false
-  },
-  {
-    id: '8',
-    name: 'Anime Hero',
-    prompt: 'A human, male, teen with athletic build. Spiky colorful hair, large expressive eyes, determined expression. Wearing distinctive school uniform with magical emblem, power gauntlet. Dynamic action pose, one arm extended with energy effect. Anime art style, cel shaded, vibrant colors, action lines background.',
-    style: 'detailed',
+    name: 'Victorian Detective',
     category: 'full-body',
-    tags: ['anime', 'hero', 'action', 'magical'],
-    description: 'A young anime protagonist ready to save the world',
+    prompt: 'A tall, slender detective in a Victorian-era outfit, wearing a deerstalker hat and smoking a pipe. Dressed in a tweed coat, waistcoat, and carrying a magnifying glass. Standing on a foggy London street with gas lamps casting an eerie glow through the mist.',
+    style: 'concise',
+    tags: ['victorian', 'detective', 'historical'],
+    isFavorite: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isFavorite: false
-  },
-  {
-    id: '9',
-    name: 'Forest Druid',
-    prompt: 'An elderly human druid with white flowing beard and weathered skin. Wrinkled face with kind eyes, antler headdress, vines growing through hair and beard. Wearing natural robes made of leaves and bark, wooden staff with glowing crystal. Kneeling position communing with forest spirits, serene expression. Fantasy art style, dappled forest light, mystical forest background with ancient trees and magical flora.',
-    style: 'artistic',
-    category: 'character',
-    tags: ['druid', 'nature', 'elder', 'magic'],
-    description: 'An ancient druid keeper of forest wisdom',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    isFavorite: false
-  },
-  {
-    id: '10',
-    name: 'Space Marine',
-    prompt: 'A human, female, adult with muscular build. Strong jawline, short military haircut, cybernetic eye implant. Wearing powered exo-armor with heavy plating, helmet at side, massive rifle. Standing at attention, battle-hardened expression. Sci-fi art style, space station interior background, dramatic lighting with lens flares.',
-    style: 'detailed',
-    category: 'character',
-    tags: ['sci-fi', 'military', 'space', 'warrior'],
-    description: 'An elite space marine defender of humanity',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    isFavorite: false
+    description: 'Classic detective character in atmospheric Victorian London setting.'
   }
 ];
 
-interface PromptGeneratorProps {
-  parameters: CharacterParameters;
+// Helper function to generate prompt from parameters
+function generatePromptFromParameters(parameters: CharacterParameters, style: string): string {
+  const hasValue = (obj: any) => obj && obj.value && obj.value !== 'none';
+  
+  // Start with character basics
+  let prompt = '';
+  
+  // Character name and basic info
+  if (parameters.characterName) {
+    prompt += `${parameters.characterName}, `;
+  }
+  
+  // Race information
+  if (parameters.race && parameters.race.race) {
+    const race = parameters.race.race.label;
+    prompt += `a ${parameters.race.race.label} `;
+    
+    // Add subrace if available
+    if (parameters.race.subRace) {
+      prompt += `(${parameters.race.subRace.label}) `;
+    }
+  }
+  
+  // Basic information
+  prompt += `${parameters.ageGroup} ${parameters.gender} with ${parameters.bodyType} build. `;
+  
+  // Body details
+  if (parameters.body && parameters.body.proportions) {
+    const height = parameters.body.proportions.height?.label;
+    const build = parameters.body.proportions.build?.label;
+    
+    if (height && build) {
+      prompt += `${height} height with ${build} build. `;
+    }
+  }
+  
+  // Skin tone
+  if (parameters.body && parameters.body.features && parameters.body.features.skinTone) {
+    prompt += `${parameters.body.features.skinTone.label} skin tone. `;
+  }
+  
+  // Head and facial details
+  if (parameters.head) {
+    // Face shape
+    if (parameters.head.shape) {
+      prompt += `${parameters.head.shape} face shape. `;
+    }
+    
+    // Hair details
+    if (parameters.head.hair) {
+      const { style, color, length } = parameters.head.hair;
+      if (style && color) {
+        prompt += `Has ${length || ''} ${color} ${style} hair. `;
+      }
+    }
+    
+    // Face details
+    if (parameters.head.face) {
+      const { eyes, nose, mouth, ears } = parameters.head.face;
+      let faceDetails = '';
+      
+      if (eyes) faceDetails += `${eyes} eyes, `;
+      if (nose) faceDetails += `${nose} nose, `;
+      if (mouth) faceDetails += `${mouth} lips, `;
+      if (ears) faceDetails += `${ears} ears, `;
+      
+      if (faceDetails) {
+        // Remove the trailing comma and space
+        prompt += `Facial features: ${faceDetails.slice(0, -2)}. `;
+      }
+    }
+    
+    // Head accessories
+    if (parameters.head.accessories && parameters.head.accessories.length > 0) {
+      prompt += `Wearing ${parameters.head.accessories.join(', ')} on head. `;
+    }
+  }
+  
+  // Body features
+  if (parameters.body && parameters.body.features) {
+    // Scars
+    if (parameters.body.features.scars && parameters.body.features.scars.length > 0) {
+      prompt += `Has scars: ${parameters.body.features.scars.join(', ')}. `;
+    }
+    
+    // Tattoos
+    if (parameters.body.features.tattoos && parameters.body.features.tattoos.length > 0) {
+      prompt += `Has tattoos: ${parameters.body.features.tattoos.join(', ')}. `;
+    }
+  }
+  
+  // Clothing details - more detailed for the "detailed" style
+  if (parameters.clothing) {
+    prompt += 'Wearing ';
+    
+    // Style
+    if (hasValue(parameters.clothing.style)) {
+      prompt += `${parameters.clothing.style.label} style clothes. `;
+    }
+    
+    // Upper body
+    if (hasValue(parameters.clothing.upperBody?.type)) {
+      const upperType = parameters.clothing.upperBody.type.label;
+      const upperColor = hasValue(parameters.clothing.upperBody.color) ? 
+        parameters.clothing.upperBody.color.label : '';
+      const upperMaterial = hasValue(parameters.clothing.upperBody.material) ? 
+        parameters.clothing.upperBody.material.label : '';
+      
+      prompt += `${upperColor} ${upperMaterial} ${upperType} for upper body. `;
+    }
+    
+    // Lower body
+    if (hasValue(parameters.clothing.lowerBody?.type)) {
+      const lowerType = parameters.clothing.lowerBody.type.label;
+      const lowerColor = hasValue(parameters.clothing.lowerBody.color) ? 
+        parameters.clothing.lowerBody.color.label : '';
+      const lowerMaterial = hasValue(parameters.clothing.lowerBody.material) ? 
+        parameters.clothing.lowerBody.material.label : '';
+      
+      prompt += `${lowerColor} ${lowerMaterial} ${lowerType} for lower body. `;
+    }
+    
+    // Footwear
+    if (hasValue(parameters.clothing.footwear?.type)) {
+      const footwearType = parameters.clothing.footwear.type.label;
+      const footwearColor = hasValue(parameters.clothing.footwear.color) ? 
+        parameters.clothing.footwear.color.label : '';
+      const footwearMaterial = hasValue(parameters.clothing.footwear.material) ? 
+        parameters.clothing.footwear.material.label : '';
+      
+      prompt += `${footwearColor} ${footwearMaterial} ${footwearType} for footwear. `;
+    }
+    
+    // Headwear
+    if (hasValue(parameters.clothing.headwear?.type) && parameters.clothing.headwear.type.value !== 'none') {
+      const headwearType = parameters.clothing.headwear.type.label;
+      const headwearColor = hasValue(parameters.clothing.headwear.color) ? 
+        parameters.clothing.headwear.color.label : '';
+      const headwearMaterial = hasValue(parameters.clothing.headwear.material) ? 
+        parameters.clothing.headwear.material.label : '';
+      
+      prompt += `${headwearColor} ${headwearMaterial} ${headwearType} on head. `;
+    }
+    
+    // Accessories
+    if (parameters.clothing.accessories && parameters.clothing.accessories.length > 0) {
+      prompt += `Accessories: ${parameters.clothing.accessories.join(', ')}. `;
+    }
+  }
+  
+  // Pose information
+  if (parameters.pose) {
+    // Stance
+    if (hasValue(parameters.pose.stance)) {
+      prompt += `${parameters.pose.stance.label} stance. `;
+    }
+    
+    // Expression
+    if (hasValue(parameters.pose.expression)) {
+      prompt += `${parameters.pose.expression.label} facial expression. `;
+    }
+    
+    // Arm position
+    if (parameters.pose.armPosition) {
+      if ('value' in parameters.pose.armPosition && hasValue(parameters.pose.armPosition)) {
+        prompt += `Arms: ${parameters.pose.armPosition.label}. `;
+      } else if ('mode' in parameters.pose.armPosition && parameters.pose.armPosition.mode === 'individual') {
+        prompt += `Arms: left arm ${parameters.pose.armPosition.left}, right arm ${parameters.pose.armPosition.right}. `;
+      }
+    }
+    
+    // Hand position
+    if (parameters.pose.handPosition) {
+      if ('value' in parameters.pose.handPosition && hasValue(parameters.pose.handPosition)) {
+        prompt += `Hands: ${parameters.pose.handPosition.label}. `;
+      } else if ('mode' in parameters.pose.handPosition && parameters.pose.handPosition.mode === 'individual') {
+        prompt += `Hands: left hand ${parameters.pose.handPosition.left}, right hand ${parameters.pose.handPosition.right}. `;
+      }
+    }
+    
+    // Head position
+    if (hasValue(parameters.pose.headPosition)) {
+      prompt += `Head: ${parameters.pose.headPosition.label}. `;
+    }
+  }
+  
+  // Art style information - tailored based on prompt style selection
+  if (parameters.style) {
+    let styleInfo = '';
+    
+    // Art style
+    if (hasValue(parameters.style.artStyle)) {
+      styleInfo += `${parameters.style.artStyle.label} art style, `;
+    }
+    
+    // Rendering
+    if (hasValue(parameters.style.rendering)) {
+      styleInfo += `${parameters.style.rendering.label} rendering, `;
+    }
+    
+    // Lighting
+    if (hasValue(parameters.style.lighting)) {
+      styleInfo += `${parameters.style.lighting.label} lighting, `;
+    }
+    
+    // Mood
+    if (hasValue(parameters.style.mood)) {
+      styleInfo += `${parameters.style.mood.label} mood, `;
+    }
+    
+    // Color Palette
+    if (hasValue(parameters.style.colorPalette)) {
+      styleInfo += `${parameters.style.colorPalette.label} color palette, `;
+    }
+    
+    if (styleInfo) {
+      // Remove the trailing comma and space
+      prompt += `Visual style: ${styleInfo.slice(0, -2)}. `;
+    }
+  }
+  
+  // Camera information
+  if (parameters.camera) {
+    if (parameters.camera.layout) {
+      prompt += `${parameters.camera.layout} layout. `;
+    }
+    
+    if (parameters.camera.composition) {
+      prompt += `${parameters.camera.composition} composition. `;
+    }
+    
+    if (parameters.camera.effects && parameters.camera.effects.length > 0) {
+      prompt += `Camera effects: ${parameters.camera.effects.join(', ')}. `;
+    }
+  }
+  
+  // Background information
+  if (parameters.background) {
+    let bgInfo = '';
+    
+    if (parameters.background.type) {
+      bgInfo += `${parameters.background.type} background type, `;
+    }
+    
+    if (parameters.background.color) {
+      bgInfo += `${parameters.background.color} background color, `;
+    }
+    
+    if (parameters.background.environment) {
+      bgInfo += `set in ${parameters.background.environment}, `;
+    }
+    
+    if (bgInfo) {
+      // Remove the trailing comma and space
+      prompt += `Background: ${bgInfo.slice(0, -2)}. `;
+    }
+  }
+  
+  // For different prompt styles, modify the output
+  if (style === 'concise') {
+    // Create a shorter version by extracting key elements
+    const parts = prompt.split('. ');
+    const basicInfo = parts.slice(0, 2).join('. ');
+    const styleInfo = parts.find(p => p.includes('Visual style'));
+    
+    prompt = `${basicInfo}. ${styleInfo || 'Realistic style.'} `;
+  } else if (style === 'artistic') {
+    // Add some artistic descriptions
+    prompt += 'Artistically rendered with attention to details and mood. Creative interpretation encouraged. ';
+  }
+  
+  return prompt.trim();
 }
 
-export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) => {
+interface PromptGeneratorProps {
+  parameters: CharacterParameters;
+  language: 'en' | 'id';
+}
+
+export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters, language }) => {
+  const translations = language === 'en' ? enTranslations : idTranslations;
   const [promptStyle, setPromptStyle] = useState<'detailed' | 'concise' | 'artistic'>('detailed');
-  const [autoGenerate, setAutoGenerate] = useState(false);
+  const [autoGenerate, setAutoGenerate] = useState(true);
   const [promptText, setPromptText] = useState('');
   const [presets, setPresets] = useState<PromptPreset[]>(defaultPresets);
   const [searchQuery, setSearchQuery] = useState('');
@@ -145,6 +363,18 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
   const [presetTags, setPresetTags] = useState('');
   const [presetDescription, setPresetDescription] = useState('');
 
+  // Load presets from localStorage on client after hydration
+  useEffect(() => {
+    const stored = localStorage.getItem('promptPresets');
+    if (stored) {
+      try {
+        setPresets(JSON.parse(stored));
+      } catch (e) {
+        console.error('Failed to parse stored presets', e);
+      }
+    }
+  }, []);
+
   // Auto-generate prompt when parameters change
   useEffect(() => {
     if (autoGenerate) {
@@ -152,228 +382,84 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
     }
   }, [parameters, promptStyle, autoGenerate]);
 
+  // Sync presets to localStorage whenever presets change
+  useEffect(() => {
+    localStorage.setItem('promptPresets', JSON.stringify(presets));
+  }, [presets]);
+
+  // Generate prompt based on parameters and style
   const generatePrompt = () => {
-    // Membuat prompt yang lebih lengkap berdasarkan parameter yang ada
-    
-    // Basic info
-    let basicInfo = '';
-    if (parameters.characterName) {
-      basicInfo += `${parameters.characterName}, `;
-    }
-    basicInfo += `a ${parameters.gender}, ${parameters.ageGroup}, ${parameters.bodyType} build`;
-    
-    // Race info
-    const race = parameters.race?.race?.label || 'human';
-    const subRace = parameters.race?.subRace?.label || '';
-    
-    // Add sub-race/ethnicity to the race description
-    let raceDescription = race;
-    if (subRace && parameters.race?.race?.category === 'real') {
-      raceDescription = `${subRace} ${race}`;
-    }
-    
-    const raceFeatures = parameters.race?.features?.length > 0 
-      ? `with ${parameters.race.features.join(', ')}` 
-      : '';
-    
-    // Head features
-    let headInfo = '';
-    if (parameters.head) {
-      headInfo += `with ${parameters.head.shape} face, `;
-      if (parameters.head.hair) {
-        headInfo += `${parameters.head.hair.length} ${parameters.head.hair.style} ${parameters.head.hair.color} hair, `;
-      }
-      if (parameters.head.face) {
-        headInfo += `${parameters.head.face.eyes} eyes, ${parameters.head.face.nose} nose, ${parameters.head.face.mouth} mouth, `;
-      }
-      if (parameters.head.accessories && parameters.head.accessories.length > 0) {
-        headInfo += `wearing ${parameters.head.accessories.join(', ')}, `;
-      }
-    }
-    
-    // Body features
-    let bodyInfo = '';
-    if (parameters.body) {
-      if (parameters.body.proportions) {
-        bodyInfo += `${parameters.body.proportions.height?.label || ''} height, ${parameters.body.proportions.build?.label || ''} build, `;
-      }
-      if (parameters.body.features) {
-        bodyInfo += `${parameters.body.features.skinTone?.label || ''} skin tone, `;
-        if (parameters.body.features.scars && parameters.body.features.scars.length > 0) {
-          bodyInfo += `with scars: ${parameters.body.features.scars.join(', ')}, `;
-        }
-        if (parameters.body.features.tattoos && parameters.body.features.tattoos.length > 0) {
-          bodyInfo += `with tattoos: ${parameters.body.features.tattoos.join(', ')}, `;
-        }
-      }
-    }
-    
-    // Clothing info
-    let clothingInfo = '';
-    if (parameters.clothing) {
-      clothingInfo += `wearing ${parameters.clothing.style?.label || 'casual'} clothing, `;
-      
-      if (parameters.clothing.upperBody && parameters.clothing.upperBody.type) {
-        const upperType = parameters.clothing.upperBody.type.label || '';
-        const upperColor = parameters.clothing.upperBody.color?.label || '';
-        const upperMaterial = parameters.clothing.upperBody.material?.label || '';
-        if (upperType !== 'None' && upperType !== 'none') {
-          clothingInfo += `${upperColor} ${upperMaterial} ${upperType} on upper body, `;
-        }
-      }
-      
-      if (parameters.clothing.lowerBody && parameters.clothing.lowerBody.type) {
-        const lowerType = parameters.clothing.lowerBody.type.label || '';
-        const lowerColor = parameters.clothing.lowerBody.color?.label || '';
-        const lowerMaterial = parameters.clothing.lowerBody.material?.label || '';
-        if (lowerType !== 'None' && lowerType !== 'none') {
-          clothingInfo += `${lowerColor} ${lowerMaterial} ${lowerType} on lower body, `;
-        }
-      }
-      
-      if (parameters.clothing.accessories && parameters.clothing.accessories.length > 0) {
-        clothingInfo += `with accessories: ${parameters.clothing.accessories.join(', ')}, `;
-      }
-    }
-    
-    // Pose info
-    let poseInfo = '';
-    if (parameters.pose) {
-      poseInfo += `in a ${parameters.pose.stance?.label || 'standing'} pose, `;
-      
-      // Check if armPosition is individual or regular
-      if (typeof parameters.pose.armPosition === 'object' && 'mode' in parameters.pose.armPosition) {
-        poseInfo += `with left arm ${parameters.pose.armPosition.left} and right arm ${parameters.pose.armPosition.right}, `;
-      } else {
-        poseInfo += `with ${parameters.pose.armPosition?.label || 'relaxed'} arms, `;
-      }
-      
-      // Check if handPosition is individual or regular
-      if (typeof parameters.pose.handPosition === 'object' && 'mode' in parameters.pose.handPosition) {
-        poseInfo += `left hand ${parameters.pose.handPosition.left} and right hand ${parameters.pose.handPosition.right}, `;
-      } else {
-        poseInfo += `${parameters.pose.handPosition?.label || 'open'} hands, `;
-      }
-      
-      // Check if legPosition is individual or regular
-      if (typeof parameters.pose.legPosition === 'object' && 'mode' in parameters.pose.legPosition) {
-        poseInfo += `left leg ${parameters.pose.legPosition.left} and right leg ${parameters.pose.legPosition.right}, `;
-      } else {
-        poseInfo += `${parameters.pose.legPosition?.label || 'straight'} legs, `;
-      }
-      
-      poseInfo += `head ${parameters.pose.headPosition?.label || 'forward'}, `;
-      poseInfo += `${parameters.pose.expression?.label || 'neutral'} expression, `;
-    }
-    
-    // Camera and background
-    let cameraInfo = '';
-    if (parameters.camera) {
-      cameraInfo += `${parameters.camera.layout || 'portrait'} layout, `;
-      cameraInfo += `${parameters.camera.composition || 'center'} composition, `;
-      if (parameters.camera.effects && parameters.camera.effects.length > 0) {
-        cameraInfo += `with effects: ${parameters.camera.effects.join(', ')}, `;
-      }
-    }
-    
-    let backgroundInfo = '';
-    if (parameters.background) {
-      backgroundInfo += `${parameters.background.color || 'white'} ${parameters.background.type || 'plain'} background`;
-      if (parameters.background.environment && parameters.background.environment !== 'neutral') {
-        backgroundInfo += ` in a ${parameters.background.environment} environment`;
-      }
-    }
-    
-    // Art style
-    let styleInfo = '';
-    if (parameters.style) {
-      styleInfo += `${parameters.style.artStyle?.label || 'realistic'} art style, `;
-      styleInfo += `${parameters.style.rendering?.label || 'detailed'} rendering, `;
-      styleInfo += `${parameters.style.lighting?.label || 'natural'} lighting, `;
-    }
-    
-    // Combine all parts
-    let generatedPrompt = `${basicInfo} ${raceDescription} ${raceFeatures}. `;
-    generatedPrompt += `${headInfo}`;
-    generatedPrompt += `${bodyInfo}`;
-    generatedPrompt += `${clothingInfo}`;
-    generatedPrompt += `${poseInfo}`;
-    generatedPrompt += `${styleInfo}`;
-    generatedPrompt += `${cameraInfo}`;
-    generatedPrompt += `${backgroundInfo}.`;
-    
-    // Clean up double spaces, commas, and periods
-    generatedPrompt = generatedPrompt
-      .replace(/\s+/g, ' ')
-      .replace(/,\s*,/g, ',')
-      .replace(/\.\s*\./g, '.')
-      .replace(/\,\s*\./g, '.');
-    
-    // Apply style formatting based on selected style
-    switch (promptStyle) {
-      case 'detailed':
-        // Already detailed, just clean it up
-        break;
-      case 'concise':
-        // Remove some details to make it more concise
-        generatedPrompt = generatedPrompt
-          .replace(/,\s+with/g, ' with')
-          .replace(/\s+wearing/g, ', wearing')
-          .replace(/\s+in a/g, ', in a');
-        break;
-      case 'artistic':
-        // Make it more artistic with richer language
-        generatedPrompt = `Stunning artistic portrayal of ${generatedPrompt}`;
-        generatedPrompt = generatedPrompt.replace(/,\s+/g, '; ');
-        generatedPrompt += ' Vibrant colors, dramatic composition, professional photography.';
-        break;
-    }
-    
-    setPromptText(generatedPrompt);
+    const prompt = generatePromptFromParameters(parameters, promptStyle);
+    setPromptText(prompt);
   };
 
+  // Copy prompt to clipboard
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(promptText);
-    // In a real app, you'd show a toast notification here
+    if (promptText) {
+      navigator.clipboard.writeText(promptText)
+        .then(() => {
+          // Could show a toast or other notification here
+          console.log('Copied to clipboard');
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    }
   };
 
+  // Save current prompt as a preset
   const savePreset = () => {
-    if (presetName.trim() === '') return;
+    if (!promptText || !presetName) return;
     
     const newPreset: PromptPreset = {
-      id: Date.now().toString(),
-      name: presetName.trim(),
+      id: Date.now().toString(), // Simple unique ID generation
+      name: presetName,
+      category: presetCategory,
       prompt: promptText,
       style: promptStyle,
-      category: presetCategory,
-      tags: presetTags.split(',').map(tag => tag.trim()).filter(Boolean),
-      description: presetDescription,
+      tags: presetTags.split(',').map(tag => tag.trim()),
+      isFavorite: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      isFavorite: false
+      description: presetDescription
     };
     
     setPresets([...presets, newPreset]);
-    setShowSaveModal(false);
+    
+    // Reset form
     setPresetName('');
+    setPresetCategory('character');
     setPresetTags('');
     setPresetDescription('');
+    setShowSaveModal(false);
   };
+
+  // Filter presets based on search query and category
+  const filteredPresets = presets.filter(preset => {
+    const matchesSearch = !searchQuery || 
+      preset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      preset.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = categoryFilter === 'all' || preset.category === categoryFilter;
+    const matchesFavorite = !showFavorites || preset.isFavorite;
+    
+    return matchesSearch && matchesCategory && matchesFavorite;
+  });
 
   return (
     <div className="prompt-generator">
-      <h3>Prompt Generator</h3>
+      <h3>{translations.promptGenerator}</h3>
       
       <div className="style-selector">
-        <label htmlFor="promptStyle">Prompt Style:</label>
+        <label htmlFor="promptStyle">{translations.promptStyle}</label>
         <select
           id="promptStyle"
           value={promptStyle}
           onChange={(e) => setPromptStyle(e.target.value as 'detailed' | 'concise' | 'artistic')}
         >
-          <option value="detailed">Detailed</option>
-          <option value="concise">Concise</option>
-          <option value="artistic">Artistic</option>
+          <option value="detailed">{translations.detailedPrompt}</option>
+          <option value="concise">{translations.concise}</option>
+          <option value="artistic">{translations.artistic}</option>
         </select>
       </div>
       
@@ -384,76 +470,84 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
             checked={autoGenerate}
             onChange={(e) => setAutoGenerate(e.target.checked)}
           />
-          Auto-generate prompt as parameters change
+          {translations.autoGenerate}
         </label>
       </div>
       
       <div className="button-group">
         <button className="generate-button" onClick={generatePrompt}>
-          Generate Prompt
+          {translations.generatePrompt}
         </button>
         <button className="copy-button" onClick={copyToClipboard}>
-          Copy
+          {translations.copy}
         </button>
         <button className="save-button" onClick={() => setShowSaveModal(true)}>
-          Save as Preset
+          {translations.saveAsPreset}
         </button>
       </div>
       
       <div className="prompt-output">
-        <h4>Generated Prompt</h4>
+        <h4>{translations.generatedPrompt}</h4>
         <div className="prompt-text">
-          {promptText || "Your generated prompt will appear here. Click 'Generate Prompt' to create one based on your character parameters."}
+          {promptText || translations.promptWillAppear}
         </div>
       </div>
       
       <div className="presets-section">
         <div className="presets-header">
-          <h4>Saved Presets</h4>
-          <div className="presets-filters">
+          <h4>{translations.savedPresets}</h4>
+          <div className="presets-search">
             <input
               type="text"
-              className="search-input"
-              placeholder="Search presets..."
+              placeholder={translations.searchPresets}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <select
-              className="category-select"
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-            >
-              <option value="all">All Categories</option>
-              <option value="character">Character</option>
-              <option value="portrait">Portrait</option>
-              <option value="full-body">Full Body</option>
-              <option value="scene">Scene</option>
-              <option value="custom">Custom</option>
-            </select>
-            <button
-              className={`favorite-toggle ${showFavorites ? 'active' : ''}`}
-              onClick={() => setShowFavorites(!showFavorites)}
-            >
-              ★
-            </button>
           </div>
         </div>
         
-        <div className="presets-list">
-          {presets.length === 0 ? (
-            <div className="preset-empty">
-              No presets saved yet. Create and save a prompt to add it here.
+        <div className="filter-options">
+          <div className="category-filter">
+            <label>{translations.styleLabel}</label>
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+            >
+              <option value="all">{translations.allCategories}</option>
+              <option value="character">{translations.character}</option>
+              <option value="portrait">{translations.portraitCategory}</option>
+              <option value="full-body">{translations.fullBody}</option>
+              <option value="scene">{translations.scene}</option>
+              <option value="custom">{translations.custom}</option>
+            </select>
+          </div>
+          
+          <div className="favorite-filter">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={showFavorites}
+                onChange={(e) => setShowFavorites(e.target.checked)}
+              />
+              {translations.onlyFavorites || 'Only favorites'}
+            </label>
+          </div>
+        </div>
+        
+        <div className="presets-grid">
+          {filteredPresets.length === 0 ? (
+            <div className="no-presets-message">
+              {translations.noPresetsSaved}
             </div>
           ) : (
-            presets.map(preset => (
+            filteredPresets.map(preset => (
               <div key={preset.id} className="preset-item">
-                <div className="preset-info">
-                  <div className="preset-header">
-                    <span className="preset-name">{preset.name}</span>
+                <div className="preset-header">
+                  <h5 className="preset-name">{preset.name}</h5>
+                  <div className="preset-controls">
                     <button 
                       className={`favorite-button ${preset.isFavorite ? 'active' : ''}`}
                       onClick={() => {
-                        // Toggle favorite status
                         const updatedPresets = presets.map(p => 
                           p.id === preset.id ? {...p, isFavorite: !p.isFavorite} : p
                         );
@@ -462,16 +556,20 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
                     >
                       {preset.isFavorite ? '★' : '☆'}
                     </button>
+                    <span className="preset-category">{preset.category}</span>
                   </div>
-                  <span className="preset-category">{preset.category}</span>
-                  {preset.description && <p className="preset-description">{preset.description}</p>}
-                  <div className="preset-tags">
-                    {preset.tags.map((tag, index) => (
-                      <span key={index} className="tag">{tag}</span>
-                    ))}
-                  </div>
-                  <span className="preset-style">Style: {preset.style}</span>
                 </div>
+                
+                <div className="preset-content">
+                  <p className="preset-prompt">{preset.prompt.substring(0, 150)}...</p>
+                </div>
+                
+                <div className="preset-tags">
+                  {preset.tags.map((tag, index) => (
+                    <span key={index} className="preset-tag">{tag}</span>
+                  ))}
+                </div>
+                
                 <div className="preset-actions">
                   <button 
                     className="load-button"
@@ -480,7 +578,7 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
                       setPromptStyle(preset.style);
                     }}
                   >
-                    Load
+                    {translations.load}
                   </button>
                   <button 
                     className="delete-button"
@@ -489,7 +587,7 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
                       setPresets(updatedPresets);
                     }}
                   >
-                    Delete
+                    {translations.delete}
                   </button>
                 </div>
               </div>
@@ -501,60 +599,60 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters }) 
       {showSaveModal && (
         <div className="modal-overlay" onClick={() => setShowSaveModal(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h4>Save Preset</h4>
+            <h4>{translations.savePreset}</h4>
             <div className="form-group">
-              <label htmlFor="presetName">Name</label>
+              <label htmlFor="presetName">{translations.presetName}</label>
               <input
                 id="presetName"
                 type="text"
                 className="preset-name-input"
                 value={presetName}
                 onChange={(e) => setPresetName(e.target.value)}
-                placeholder="Enter preset name"
+                placeholder={translations.enterPresetName}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="presetCategory">Category</label>
+              <label htmlFor="presetCategory">{translations.category}</label>
               <select
                 id="presetCategory"
                 className="preset-category-select"
                 value={presetCategory}
                 onChange={(e) => setPresetCategory(e.target.value as PresetCategory)}
               >
-                <option value="character">Character</option>
-                <option value="portrait">Portrait</option>
-                <option value="full-body">Full Body</option>
-                <option value="scene">Scene</option>
-                <option value="custom">Custom</option>
+                <option value="character">{translations.character}</option>
+                <option value="portrait">{translations.portraitCategory}</option>
+                <option value="full-body">{translations.fullBody}</option>
+                <option value="scene">{translations.scene}</option>
+                <option value="custom">{translations.custom}</option>
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="presetTags">Tags (comma separated)</label>
+              <label htmlFor="presetTags">{translations.tags}</label>
               <input
                 id="presetTags"
                 type="text"
                 className="preset-tags-input"
                 value={presetTags}
                 onChange={(e) => setPresetTags(e.target.value)}
-                placeholder="fantasy, warrior, etc."
+                placeholder={translations.tagsPlaceholder}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="presetDescription">Description (optional)</label>
+              <label htmlFor="presetDescription">{translations.description}</label>
               <textarea
                 id="presetDescription"
                 className="preset-description-input"
                 value={presetDescription}
                 onChange={(e) => setPresetDescription(e.target.value)}
-                placeholder="Describe this preset"
+                placeholder={translations.describePreset}
               />
             </div>
             <div className="modal-actions">
               <button className="cancel-button" onClick={() => setShowSaveModal(false)}>
-                Cancel
+                {translations.cancel}
               </button>
               <button className="save-button" onClick={savePreset}>
-                Save
+                {translations.save}
               </button>
             </div>
           </div>

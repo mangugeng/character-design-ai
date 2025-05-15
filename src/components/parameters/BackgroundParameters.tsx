@@ -1,40 +1,49 @@
 import React from 'react';
 import { BackgroundParameters as BackgroundParametersType } from '../../types/parameters';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 
 interface BackgroundParametersProps {
   parameters: BackgroundParametersType;
   onChange: (value: Partial<BackgroundParametersType>) => void;
+  language?: 'en' | 'id';
 }
 
-export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({ parameters, onChange }) => {
+export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({ 
+  parameters, 
+  onChange,
+  language = 'en'
+}) => {
+  const translations = language === 'en' ? enTranslations : idTranslations;
+  
   const handleChange = (field: keyof BackgroundParametersType, value: string) => {
     onChange({ [field]: value });
   };
 
   const typeOptions = [
-    { value: 'solid color', label: 'Solid Color', icon: '🎨' },
-    { value: 'gradient', label: 'Gradient', icon: '🌈' },
-    { value: 'pattern', label: 'Pattern', icon: '🔲' },
-    { value: 'image', label: 'Image', icon: '🖼️' }
+    { value: 'solid color', label: language === 'en' ? 'Solid Color' : 'Warna Solid', icon: '🎨' },
+    { value: 'gradient', label: translations.gradient, icon: '🌈' },
+    { value: 'pattern', label: language === 'en' ? 'Pattern' : 'Pola', icon: '🔲' },
+    { value: 'image', label: language === 'en' ? 'Image' : 'Gambar', icon: '🖼️' }
   ];
 
   const colorOptions = [
-    { value: 'white', label: 'White', icon: '⚪' },
-    { value: 'black', label: 'Black', icon: '⚫' },
-    { value: 'gray', label: 'Gray', icon: '⚫' },
-    { value: 'blue', label: 'Blue', icon: '🔵' },
-    { value: 'green', label: 'Green', icon: '🟢' },
-    { value: 'red', label: 'Red', icon: '🔴' },
-    { value: 'yellow', label: 'Yellow', icon: '🟡' },
-    { value: 'purple', label: 'Purple', icon: '🟣' }
+    { value: 'white', label: language === 'en' ? 'White' : 'Putih', icon: '⚪' },
+    { value: 'black', label: language === 'en' ? 'Black' : 'Hitam', icon: '⚫' },
+    { value: 'gray', label: language === 'en' ? 'Gray' : 'Abu-abu', icon: '⚫' },
+    { value: 'blue', label: language === 'en' ? 'Blue' : 'Biru', icon: '🔵' },
+    { value: 'green', label: language === 'en' ? 'Green' : 'Hijau', icon: '🟢' },
+    { value: 'red', label: language === 'en' ? 'Red' : 'Merah', icon: '🔴' },
+    { value: 'yellow', label: language === 'en' ? 'Yellow' : 'Kuning', icon: '🟡' },
+    { value: 'purple', label: language === 'en' ? 'Purple' : 'Ungu', icon: '🟣' }
   ];
 
   const environmentOptions = [
-    { value: 'indoor', label: 'Indoor', icon: '🏠' },
-    { value: 'outdoor', label: 'Outdoor', icon: '🌳' },
-    { value: 'urban', label: 'Urban', icon: '🌆' },
-    { value: 'nature', label: 'Nature', icon: '🌲' },
-    { value: 'abstract', label: 'Abstract', icon: '🎨' }
+    { value: 'indoor', label: translations.indoor, icon: '🏠' },
+    { value: 'outdoor', label: translations.outdoor, icon: '🌳' },
+    { value: 'urban', label: translations.urban, icon: '🌆' },
+    { value: 'nature', label: translations.nature, icon: '🌲' },
+    { value: 'abstract', label: language === 'en' ? 'Abstract' : 'Abstrak', icon: '🎨' }
   ];
 
   const renderOptionButtons = (
@@ -59,10 +68,10 @@ export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({ para
   return (
     <div className="background-parameters">
       <div className="form-section">
-        <h3>Background Details</h3>
+       
 
         <div className="form-group">
-          <label className="form-label">Type</label>
+          <label className="form-label">{translations.backgroundType}</label>
           {renderOptionButtons(
             typeOptions,
             parameters.type,
@@ -71,7 +80,7 @@ export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({ para
         </div>
 
         <div className="form-group">
-          <label className="form-label">Color</label>
+          <label className="form-label">{language === 'en' ? 'Color' : 'Warna'}</label>
           {renderOptionButtons(
             colorOptions,
             parameters.color,
@@ -80,7 +89,7 @@ export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({ para
         </div>
 
         <div className="form-group">
-          <label className="form-label">Environment</label>
+          <label className="form-label">{translations.environmentType}</label>
           {renderOptionButtons(
             environmentOptions,
             parameters.environment,

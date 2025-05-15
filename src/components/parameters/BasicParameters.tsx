@@ -1,22 +1,28 @@
 import React from 'react';
 import { BasicParameters as BasicParametersType } from '../../types/parameters';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 
 interface BasicParametersProps {
   parameters: BasicParametersType;
   onChange: (value: BasicParametersType) => void;
+  language?: 'en' | 'id';
 }
 
 export const BasicParameters: React.FC<BasicParametersProps> = ({
   parameters,
-  onChange
+  onChange,
+  language = 'en'
 }) => {
+  const translations = language === 'en' ? enTranslations : idTranslations;
+  
   // Simplified component for deployment
   return (
     <div className="basic-parameters">
       <div className="form-section">
-        <h3>Basic Information</h3>
+        <h3>{translations.basicInformation}</h3>
         <div className="form-group">
-          <label className="form-label">Character Name</label>
+          <label className="form-label">{translations.characterName}</label>
           <input
             type="text"
             value={parameters.name}
@@ -25,10 +31,10 @@ export const BasicParameters: React.FC<BasicParametersProps> = ({
               name: e.target.value
             })}
             className="form-control"
-            placeholder="Enter character name"
+            placeholder={translations.enterCharacterName}
           />
         </div>
-        <p>Other parameters temporarily hidden for deployment.</p>
+        <p>{language === 'en' ? 'Other parameters temporarily hidden for deployment.' : 'Parameter lainnya sementara disembunyikan untuk penerapan.'}</p>
       </div>
     </div>
   );

@@ -1,15 +1,21 @@
 import React from 'react';
 import { CameraParameters as CameraParametersType } from '../../types/parameters';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 
 interface CameraParametersProps {
   parameters: CameraParametersType;
   onChange: (value: Partial<CameraParametersType>) => void;
+  language?: 'en' | 'id';
 }
 
 export const CameraParameters: React.FC<CameraParametersProps> = ({
   parameters,
-  onChange
+  onChange,
+  language = 'en'
 }) => {
+  const translations = language === 'en' ? enTranslations : idTranslations;
+  
   const handleChange = (key: keyof CameraParametersType, value: any) => {
     onChange({
       ...parameters,
@@ -18,23 +24,23 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   };
 
   const layoutOptions = [
-    { value: 'portrait', label: 'Portrait', icon: '📱' },
-    { value: 'landscape', label: 'Landscape', icon: '🖼️' },
-    { value: 'square', label: 'Square', icon: '⬛' }
+    { value: 'portrait', label: translations.portraitLayout, icon: '📱' },
+    { value: 'landscape', label: translations.landscape, icon: '🖼️' },
+    { value: 'square', label: translations.squareLayout, icon: '⬛' }
   ];
 
   const compositionOptions = [
-    { value: 'centered', label: 'Centered', icon: '🎯' },
-    { value: 'rule of thirds', label: 'Rule of Thirds', icon: '📐' },
-    { value: 'golden ratio', label: 'Golden Ratio', icon: '📏' }
+    { value: 'centered', label: translations.center, icon: '🎯' },
+    { value: 'rule of thirds', label: translations.rule_of_thirds, icon: '📐' },
+    { value: 'golden ratio', label: translations.golden_ratio, icon: '📏' }
   ];
 
   const effectOptions = [
-    { value: 'blur', label: 'Blur', icon: '🌫️' },
-    { value: 'vignette', label: 'Vignette', icon: '⭕' },
-    { value: 'grain', label: 'Grain', icon: '🎞️' },
-    { value: 'sepia', label: 'Sepia', icon: '🟤' },
-    { value: 'black and white', label: 'Black & White', icon: '⚫' }
+    { value: 'blur', label: language === 'en' ? 'Blur' : 'Blur', icon: '🌫️' },
+    { value: 'vignette', label: language === 'en' ? 'Vignette' : 'Vignette', icon: '⭕' },
+    { value: 'grain', label: language === 'en' ? 'Grain' : 'Bintik', icon: '🎞️' },
+    { value: 'sepia', label: language === 'en' ? 'Sepia' : 'Sepia', icon: '🟤' },
+    { value: 'black and white', label: language === 'en' ? 'Black & White' : 'Hitam & Putih', icon: '⚫' }
   ];
 
   const renderOptionSection = (
@@ -62,7 +68,7 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
 
   const renderEffectsSection = () => (
     <div className="option-section">
-      <h4>Effects</h4>
+      <h4>{translations.cameraEffects}</h4>
       <div className="option-grid">
         {effectOptions.map((option) => (
           <button
@@ -86,17 +92,17 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   return (
     <div className="camera-parameters">
       <div className="form-section">
-        <h3>Camera Settings</h3>
+      
 
         {renderOptionSection(
-          'Layout',
+          translations.layoutType,
           layoutOptions,
           { value: parameters.layout, label: parameters.layout, icon: '📷' },
           (value) => handleChange('layout', value.value)
         )}
 
         {renderOptionSection(
-          'Composition',
+          translations.composition,
           compositionOptions,
           { value: parameters.composition, label: parameters.composition, icon: '🎨' },
           (value) => handleChange('composition', value.value)

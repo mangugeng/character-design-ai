@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { RaceParameters as RaceParametersType } from '../../types/parameters';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 
 interface RaceOption {
   value: string;
@@ -16,6 +18,7 @@ interface SubRaceOption {
 interface RaceParametersProps {
   parameters: RaceParametersType;
   onChange: (value: RaceParametersType) => void;
+  language?: 'en' | 'id';
 }
 
 const realWorldRaces: RaceOption[] = [
@@ -256,19 +259,23 @@ const traitsMap: Record<string, string[]> = {
 
 export const RaceParameters: React.FC<RaceParametersProps> = ({
   parameters,
-  onChange
+  onChange,
+  language = 'en'
 }) => {
-  const { race, subRace, features, traits } = parameters;
-  const [activeTab, setActiveTab] = useState<'real' | 'fantasy' | 'scifi'>(race?.category || 'real');
+  const translations = language === 'en' ? enTranslations : idTranslations;
+  
+  const [activeCategory, setActiveCategory] = useState<'real' | 'fantasy' | 'scifi'>(
+    parameters.race?.category || 'real'
+  );
 
   const handleSelectRace = (option: RaceOption) => {
     onChange({
+      ...parameters,
       race: option,
       subRace: undefined,
       features: [],
       traits: []
     });
-    setActiveTab(option.category);
   };
 
   const handleSelectSubRace = (option: SubRaceOption) => {
@@ -279,9 +286,10 @@ export const RaceParameters: React.FC<RaceParametersProps> = ({
   };
 
   const handleToggleFeature = (feature: string) => {
-    const newFeatures = features.includes(feature)
-      ? features.filter(f => f !== feature)
-      : [...features, feature];
+    const newFeatures = parameters.features?.includes(feature)
+      ? parameters.features.filter(f => f !== feature)
+      : [...(parameters.features || []), feature];
+    
     onChange({
       ...parameters,
       features: newFeatures
@@ -289,9 +297,10 @@ export const RaceParameters: React.FC<RaceParametersProps> = ({
   };
 
   const handleToggleTrait = (trait: string) => {
-    const newTraits = traits.includes(trait)
-      ? traits.filter(t => t !== trait)
-      : [...traits, trait];
+    const newTraits = parameters.traits?.includes(trait)
+      ? parameters.traits.filter(t => t !== trait)
+      : [...(parameters.traits || []), trait];
+    
     onChange({
       ...parameters,
       traits: newTraits
@@ -299,107 +308,20 @@ export const RaceParameters: React.FC<RaceParametersProps> = ({
   };
 
   // Get sub-race, features, traits for selected race
-  const subRaces = race ? subRaceMap[race.value] || [] : [];
-  const featuresList = race ? featuresMap[race.value] || [] : [];
-  const traitsList = race ? traitsMap[race.value] || [] : [];
+  const subRaces = parameters.race ? subRaceMap[parameters.race.value] || [] : [];
+  const featuresList = parameters.race ? featuresMap[parameters.race.value] || [] : [];
+  const traitsList = parameters.race ? traitsMap[parameters.race.value] || [] : [];
 
   let raceOptions: RaceOption[] = [];
-  if (activeTab === 'real') raceOptions = realWorldRaces;
-  if (activeTab === 'fantasy') raceOptions = fantasyRaces;
-  if (activeTab === 'scifi') raceOptions = sciFiRaces;
+  if (activeCategory === 'real') raceOptions = realWorldRaces;
+  if (activeCategory === 'fantasy') raceOptions = fantasyRaces;
+  if (activeCategory === 'scifi') raceOptions = sciFiRaces;
 
   return (
     <div className="race-parameters">
       <div className="form-section">
-        <h3>Race</h3>
-        <div className="nav-tabs" style={{ marginBottom: 16 }}>
-          <button
-            className={`nav-link${activeTab === 'real' ? ' active' : ''}`}
-            onClick={() => setActiveTab('real')}
-            type="button"
-          >
-            Real World
-          </button>
-          <button
-            className={`nav-link${activeTab === 'fantasy' ? ' active' : ''}`}
-            onClick={() => setActiveTab('fantasy')}
-            type="button"
-          >
-            Fantasy
-          </button>
-          <button
-            className={`nav-link${activeTab === 'scifi' ? ' active' : ''}`}
-            onClick={() => setActiveTab('scifi')}
-            type="button"
-          >
-            Sci-Fi
-          </button>
-        </div>
-        <div className="option-section">
-          <div className="option-grid">
-            {raceOptions.map((option) => (
-              <button
-                key={option.value}
-                className={`option-button ${race && race.value === option.value ? 'selected' : ''}`}
-                onClick={() => handleSelectRace(option)}
-              >
-                <span className="option-icon">{option.icon}</span>
-                <span className="option-label">{option.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        {/* Sub-race */}
-        {race && subRaces.length > 0 && (
-          <div className="option-section">
-            <h4>Sub-race</h4>
-            <div className="option-grid">
-              {subRaces.map((option) => (
-                <button
-                  key={option.value}
-                  className={`option-button ${subRace && subRace.value === option.value ? 'selected' : ''}`}
-                  onClick={() => handleSelectSubRace(option)}
-                >
-                  <span className="option-label">{option.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-        {/* Features */}
-        {race && featuresList.length > 0 && (
-          <div className="option-section">
-            <h4>Features</h4>
-            <div className="option-grid">
-              {featuresList.map((feature) => (
-                <button
-                  key={feature}
-                  className={`option-button ${features.includes(feature) ? 'selected' : ''}`}
-                  onClick={() => handleToggleFeature(feature)}
-                >
-                  <span className="option-label">{feature}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-        {/* Traits */}
-        {race && traitsList.length > 0 && (
-          <div className="option-section">
-            <h4>Traits</h4>
-            <div className="option-grid">
-              {traitsList.map((trait) => (
-                <button
-                  key={trait}
-                  className={`option-button ${traits.includes(trait) ? 'selected' : ''}`}
-                  onClick={() => handleToggleTrait(trait)}
-                >
-                  <span className="option-label">{trait}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+      
+        <p>{language === 'en' ? 'Race customization is temporarily hidden for deployment.' : 'Kustomisasi ras sementara disembunyikan untuk penerapan.'}</p>
       </div>
     </div>
   );

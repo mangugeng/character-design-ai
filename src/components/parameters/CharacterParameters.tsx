@@ -9,16 +9,24 @@ import { StyleParameters } from './StyleParameters';
 import { CameraParameters } from './CameraParameters';
 import { BackgroundParameters } from './BackgroundParameters';
 import { RaceParameters } from './RaceParameters';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 
 interface CharacterParametersProps {
   parameters: CharacterParametersType;
   onChange: (parameters: CharacterParametersType) => void;
+  language?: 'en' | 'id';
 }
 
 type TabType = 'basic' | 'race' | 'head' | 'body' | 'pose' | 'clothing' | 'style' | 'camera' | 'background';
 
-export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parameters, onChange }) => {
+export const CharacterParameters: React.FC<CharacterParametersProps> = ({ 
+  parameters, 
+  onChange,
+  language = 'en'
+}) => {
   const [activeTab, setActiveTab] = useState<TabType>('basic');
+  const translations = language === 'en' ? enTranslations : idTranslations;
 
   const handleChange = (key: keyof CharacterParametersType, value: any) => {
     onChange({
@@ -44,6 +52,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
               handleChange('ageGroup', value.ageGroup);
               handleChange('bodyType', value.bodyType);
             }}
+            language={language}
           />
         );
       case 'race':
@@ -51,6 +60,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <RaceParameters
             parameters={parameters.race}
             onChange={(value) => handleChange('race', value)}
+            language={language}
           />
         );
       case 'head':
@@ -58,6 +68,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <HeadParameters
             parameters={parameters.head}
             onChange={(value) => handleChange('head', value)}
+            language={language}
           />
         );
       case 'body':
@@ -65,6 +76,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <BodyParameters
             parameters={parameters.body}
             onChange={(value) => handleChange('body', value)}
+            language={language}
           />
         );
       case 'clothing':
@@ -72,6 +84,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <ClothingParameters
             parameters={parameters.clothing}
             onChange={(value) => handleChange('clothing', value)}
+            language={language}
           />
         );
       case 'pose':
@@ -79,6 +92,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <PoseParameters
             parameters={parameters.pose}
             onChange={(value) => handleChange('pose', value)}
+            language={language}
           />
         );
       case 'style':
@@ -86,6 +100,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <StyleParameters
             parameters={parameters.style}
             onChange={(value) => handleChange('style', value)}
+            language={language}
           />
         );
       case 'camera':
@@ -93,6 +108,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <CameraParameters
             parameters={parameters.camera}
             onChange={(value) => handleChange('camera', value)}
+            language={language}
           />
         );
       case 'background':
@@ -100,6 +116,7 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           <BackgroundParameters
             parameters={parameters.background}
             onChange={(value) => handleChange('background', value)}
+            language={language}
           />
         );
       default:
@@ -114,55 +131,55 @@ export const CharacterParameters: React.FC<CharacterParametersProps> = ({ parame
           className={`tab-button ${activeTab === 'basic' ? 'active' : ''}`}
           onClick={() => setActiveTab('basic')}
         >
-          Basic
+          {translations.basicInfoTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'race' ? 'active' : ''}`}
           onClick={() => setActiveTab('race')}
         >
-          Race
+          {translations.raceTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'head' ? 'active' : ''}`}
           onClick={() => setActiveTab('head')}
         >
-          Head
+          {translations.headTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'body' ? 'active' : ''}`}
           onClick={() => setActiveTab('body')}
         >
-          Body
+          {translations.bodyTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'clothing' ? 'active' : ''}`}
           onClick={() => setActiveTab('clothing')}
         >
-          Clothing
+          {translations.clothingTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'pose' ? 'active' : ''}`}
           onClick={() => setActiveTab('pose')}
         >
-          Pose
+          {translations.poseTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'style' ? 'active' : ''}`}
           onClick={() => setActiveTab('style')}
         >
-          Style
+          {translations.styleTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'camera' ? 'active' : ''}`}
           onClick={() => setActiveTab('camera')}
         >
-          Camera
+          {translations.cameraTab}
         </button>
         <button
           className={`tab-button ${activeTab === 'background' ? 'active' : ''}`}
           onClick={() => setActiveTab('background')}
         >
-          Background
+          {translations.backgroundTab}
         </button>
       </div>
       <div className="tab-content">

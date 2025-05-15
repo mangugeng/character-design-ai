@@ -1,15 +1,21 @@
 import React from 'react';
 import { HeadParameters as HeadParametersType } from '../../types/parameters';
+import { enTranslations } from '../../translations/en';
+import { idTranslations } from '../../translations/id';
 
 interface HeadParametersProps {
   parameters: HeadParametersType;
   onChange: (value: HeadParametersType) => void;
+  language?: 'en' | 'id';
 }
 
 export const HeadParameters: React.FC<HeadParametersProps> = ({
   parameters,
-  onChange
+  onChange,
+  language = 'en'
 }) => {
+  const translations = language === 'en' ? enTranslations : idTranslations;
+  
   const handleChange = (key: keyof HeadParametersType, value: any) => {
     onChange({
       ...parameters,
@@ -18,55 +24,55 @@ export const HeadParameters: React.FC<HeadParametersProps> = ({
   };
 
   const shapeOptions = [
-    { value: 'round', label: 'Round', icon: '⭕' },
-    { value: 'oval', label: 'Oval', icon: '🔵' },
-    { value: 'square', label: 'Square', icon: '⬛' },
-    { value: 'heart', label: 'Heart', icon: '❤️' },
-    { value: 'diamond', label: 'Diamond', icon: '💎' }
+    { value: 'round', label: translations.round, icon: '⭕' },
+    { value: 'oval', label: translations.oval, icon: '🔵' },
+    { value: 'square', label: translations.squareShape, icon: '⬛' },
+    { value: 'heart', label: translations.heart, icon: '❤️' },
+    { value: 'diamond', label: translations.diamond, icon: '💎' }
   ];
 
   const hairStyleOptions = [
-    { value: 'short', label: 'Short', icon: '✂️' },
-    { value: 'medium', label: 'Medium', icon: '💇' },
-    { value: 'long', label: 'Long', icon: '💇‍♀️' },
-    { value: 'curly', label: 'Curly', icon: '🔄' },
-    { value: 'wavy', label: 'Wavy', icon: '🌊' }
+    { value: 'short', label: translations.short, icon: '✂️' },
+    { value: 'medium', label: translations.medium, icon: '💇' },
+    { value: 'long', label: translations.long, icon: '💇‍♀️' },
+    { value: 'curly', label: translations.curly, icon: '🔄' },
+    { value: 'wavy', label: translations.wavy, icon: '🌊' }
   ];
 
   const hairColorOptions = [
-    { value: 'black', label: 'Black', icon: '⚫' },
-    { value: 'brown', label: 'Brown', icon: '🟤' },
-    { value: 'blonde', label: 'Blonde', icon: '🟡' },
-    { value: 'red', label: 'Red', icon: '🔴' },
-    { value: 'gray', label: 'Gray', icon: '⚪' }
+    { value: 'black', label: translations.blackColor, icon: '⚫' },
+    { value: 'brown', label: translations.brownColor, icon: '🟤' },
+    { value: 'blonde', label: translations.blonde, icon: '🟡' },
+    { value: 'red', label: translations.redColor, icon: '🔴' },
+    { value: 'gray', label: translations.gray, icon: '⚪' }
   ];
 
   const eyesOptions = [
-    { value: 'almond', label: 'Almond', icon: '👁️' },
-    { value: 'round', label: 'Round', icon: '👀' },
-    { value: 'narrow', label: 'Narrow', icon: '😑' },
-    { value: 'wide', label: 'Wide', icon: '😳' }
+    { value: 'almond', label: translations.almond, icon: '👁️' },
+    { value: 'round', label: translations.round, icon: '👀' },
+    { value: 'narrow', label: translations.narrow, icon: '😑' },
+    { value: 'wide', label: translations.wide, icon: '😳' }
   ];
 
   const noseOptions = [
-    { value: 'straight', label: 'Straight', icon: '👃' },
-    { value: 'button', label: 'Button', icon: '🔘' },
-    { value: 'roman', label: 'Roman', icon: '🏛️' },
-    { value: 'nubian', label: 'Nubian', icon: '🏺' }
+    { value: 'straight', label: translations.straight, icon: '👃' },
+    { value: 'button', label: translations.button, icon: '🔘' },
+    { value: 'roman', label: translations.roman, icon: '🏛️' },
+    { value: 'nubian', label: translations.nubian, icon: '🏺' }
   ];
 
   const mouthOptions = [
-    { value: 'full', label: 'Full', icon: '👄' },
-    { value: 'thin', label: 'Thin', icon: '😐' },
-    { value: 'wide', label: 'Wide', icon: '😃' },
-    { value: 'small', label: 'Small', icon: '😊' }
+    { value: 'full', label: translations.full, icon: '👄' },
+    { value: 'thin', label: translations.thin, icon: '😐' },
+    { value: 'wide', label: translations.wide, icon: '😃' },
+    { value: 'small', label: translations.small, icon: '😊' }
   ];
 
   const earsOptions = [
-    { value: 'normal', label: 'Normal', icon: '👂' },
-    { value: 'pointed', label: 'Pointed', icon: '🧝' },
-    { value: 'small', label: 'Small', icon: '👂' },
-    { value: 'large', label: 'Large', icon: '👂' }
+    { value: 'normal', label: translations.normal, icon: '👂' },
+    { value: 'pointed', label: translations.pointed, icon: '🧝' },
+    { value: 'small', label: translations.small, icon: '👂' },
+    { value: 'large', label: translations.large, icon: '👂' }
   ];
 
   const renderOptionSection = (
@@ -93,67 +99,80 @@ export const HeadParameters: React.FC<HeadParametersProps> = ({
   );
 
   // Get current values with defaults
-  const currentShape = { value: parameters?.shape || 'oval', label: parameters?.shape || 'Oval', icon: '👤' };
-  const currentHairStyle = { value: parameters?.hair?.style || 'short', label: parameters?.hair?.style || 'Short', icon: '💇' };
-  const currentHairColor = { value: parameters?.hair?.color || 'black', label: parameters?.hair?.color || 'Black', icon: '🎨' };
-  const currentEyes = { value: parameters?.face?.eyes || 'almond', label: parameters?.face?.eyes || 'Almond', icon: '👁️' };
-  const currentNose = { value: parameters?.face?.nose || 'straight', label: parameters?.face?.nose || 'Straight', icon: '👃' };
-  const currentMouth = { value: parameters?.face?.mouth || 'full', label: parameters?.face?.mouth || 'Full', icon: '👄' };
-  const currentEars = { value: parameters?.face?.ears || 'normal', label: parameters?.face?.ears || 'Normal', icon: '👂' };
+  const currentShape = { value: parameters?.shape || 'oval', label: parameters?.shape || translations.oval, icon: '👤' };
+  const currentHairStyle = { value: parameters?.hair?.style || 'short', label: parameters?.hair?.style || translations.short, icon: '💇' };
+  const currentHairColor = { value: parameters?.hair?.color || 'black', label: parameters?.hair?.color || translations.blackColor, icon: '🎨' };
+  const currentEyes = { value: parameters?.face?.eyes || 'almond', label: parameters?.face?.eyes || translations.almond, icon: '👁️' };
+  const currentNose = { value: parameters?.face?.nose || 'straight', label: parameters?.face?.nose || translations.straight, icon: '👃' };
+  const currentMouth = { value: parameters?.face?.mouth || 'full', label: parameters?.face?.mouth || translations.full, icon: '👄' };
+  const currentEars = { value: parameters?.face?.ears || 'normal', label: parameters?.face?.ears || translations.normal, icon: '👂' };
 
   return (
-    <div className="head-parameters">
+    <div className="head-parameters parameters-scrollable">
+      
       <div className="form-section">
-        <h3>Head Details</h3>
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.headShape,
+            shapeOptions,
+            currentShape,
+            (value) => handleChange('shape', value.value)
+          )}
+        </div>
 
-        {renderOptionSection(
-          'Face Shape',
-          shapeOptions,
-          currentShape,
-          (value) => handleChange('shape', value.value)
-        )}
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.hairStyle,
+            hairStyleOptions,
+            currentHairStyle,
+            (value) => handleChange('hair', { ...(parameters?.hair || {}), style: value.value })
+          )}
+        </div>
 
-        {renderOptionSection(
-          'Hair Style',
-          hairStyleOptions,
-          currentHairStyle,
-          (value) => handleChange('hair', { ...(parameters?.hair || {}), style: value.value })
-        )}
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.hairColor,
+            hairColorOptions,
+            currentHairColor,
+            (value) => handleChange('hair', { ...(parameters?.hair || {}), color: value.value })
+          )}
+        </div>
 
-        {renderOptionSection(
-          'Hair Color',
-          hairColorOptions,
-          currentHairColor,
-          (value) => handleChange('hair', { ...(parameters?.hair || {}), color: value.value })
-        )}
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.eyes,
+            eyesOptions,
+            currentEyes,
+            (value) => handleChange('face', { ...(parameters?.face || {}), eyes: value.value })
+          )}
+        </div>
 
-        {renderOptionSection(
-          'Eyes',
-          eyesOptions,
-          currentEyes,
-          (value) => handleChange('face', { ...(parameters?.face || {}), eyes: value.value })
-        )}
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.nose,
+            noseOptions,
+            currentNose,
+            (value) => handleChange('face', { ...(parameters?.face || {}), nose: value.value })
+          )}
+        </div>
 
-        {renderOptionSection(
-          'Nose',
-          noseOptions,
-          currentNose,
-          (value) => handleChange('face', { ...(parameters?.face || {}), nose: value.value })
-        )}
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.mouth,
+            mouthOptions,
+            currentMouth,
+            (value) => handleChange('face', { ...(parameters?.face || {}), mouth: value.value })
+          )}
+        </div>
 
-        {renderOptionSection(
-          'Mouth',
-          mouthOptions,
-          currentMouth,
-          (value) => handleChange('face', { ...(parameters?.face || {}), mouth: value.value })
-        )}
-
-        {renderOptionSection(
-          'Ears',
-          earsOptions,
-          currentEars,
-          (value) => handleChange('face', { ...(parameters?.face || {}), ears: value.value })
-        )}
+        <div className="parameter-section">
+          {renderOptionSection(
+            translations.ears,
+            earsOptions,
+            currentEars,
+            (value) => handleChange('face', { ...(parameters?.face || {}), ears: value.value })
+          )}
+        </div>
       </div>
     </div>
   );

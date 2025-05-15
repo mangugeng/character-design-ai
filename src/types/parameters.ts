@@ -100,6 +100,8 @@ export interface StyleParameters {
   artStyle: Option;
   rendering: Option;
   lighting: Option;
+  mood?: Option;
+  colorPalette?: Option;
 }
 
 export interface CameraParameters {
