@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Designer AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Character Designer AI</h1>
+        
+        <div class="row">
+            <!-- Parameters Section - Left Column -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Character Parameters</h5>
+                        
+                        <!-- Tabs Navigation -->
+                        <ul class="nav nav-tabs" id="characterTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="basic-tab" data-bs-toggle="tab" href="#basic" role="tab">
+                                    <i class="fas fa-user"></i> Basic
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="head-tab" data-bs-toggle="tab" href="#head" role="tab">
+                                    <i class="fas fa-head-side"></i> Head
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="body-tab" data-bs-toggle="tab" href="#body" role="tab">
+                                    <i class="fas fa-child"></i> Body
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="clothing-tab" data-bs-toggle="tab" href="#clothing" role="tab">
+                                    <i class="fas fa-tshirt"></i> Clothing
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pose-tab" data-bs-toggle="tab" href="#pose" role="tab">
+                                    <i class="fas fa-running"></i> Pose
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="style-tab" data-bs-toggle="tab" href="#style" role="tab">
+                                    <i class="fas fa-paint-brush"></i> Style
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="camera-tab" data-bs-toggle="tab" href="#camera" role="tab">
+                                    <i class="fas fa-camera"></i> Camera
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="background-tab" data-bs-toggle="tab" href="#background" role="tab">
+                                    <i class="fas fa-mountain"></i> Background
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="characterTabsContent">
+                            <!-- Basic Tab -->
+                            <div class="tab-pane fade show active" id="basic" role="tabpanel">
+                                <!-- Character Name -->
+                                <div class="mb-3">
+                                    <label class="form-label">Character Name</label>
+                                    <input type="text" class="form-control" id="characterName">
+                                </div>
+
+                                <!-- Gender Selection -->
+                                <div class="mb-4">
+                                    <label class="form-label">Gender</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="male">
+                                            <i class="fas fa-mars fa-2x"></i>
+                                            <span>Male</span>
+                                        </button>
+                                        <button class="option-btn" data-value="female">
+                                            <i class="fas fa-venus fa-2x"></i>
+                                            <span>Female</span>
+                                        </button>
+                                        <button class="option-btn" data-value="other">
+                                            <i class="fas fa-genderless fa-2x"></i>
+                                            <span>Other</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Age Group -->
+                                <div class="mb-4">
+                                    <label class="form-label">Age Group</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="child">
+                                            <i class="fas fa-child fa-2x"></i>
+                                            <span>Child</span>
+                                        </button>
+                                        <button class="option-btn" data-value="teen">
+                                            <i class="fas fa-user-graduate fa-2x"></i>
+                                            <span>Teen</span>
+                                        </button>
+                                        <button class="option-btn" data-value="young adult">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>Young Adult</span>
+                                        </button>
+                                        <button class="option-btn" data-value="middle age">
+                                            <i class="fas fa-user-tie fa-2x"></i>
+                                            <span>Middle Age</span>
+                                        </button>
+                                        <button class="option-btn" data-value="elderly">
+                                            <i class="fas fa-user-nurse fa-2x"></i>
+                                            <span>Elderly</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Body Type -->
+                                <div class="mb-4">
+                                    <label class="form-label">Body Type</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="slim">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>Slim</span>
+                                        </button>
+                                        <button class="option-btn" data-value="athletic">
+                                            <i class="fas fa-running fa-2x"></i>
+                                            <span>Athletic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="average">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>Average</span>
+                                        </button>
+                                        <button class="option-btn" data-value="muscular">
+                                            <i class="fas fa-dumbbell fa-2x"></i>
+                                            <span>Muscular</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Head Tab -->
+                            <div class="tab-pane fade" id="head" role="tabpanel">
+                                <!-- Head Sub-tabs Navigation -->
+                                <ul class="nav nav-pills mb-3" id="headTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="head-shape-tab" data-bs-toggle="pill" data-bs-target="#head-shape" type="button" role="tab">
+                                            <i class="fas fa-circle"></i> Shape
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="head-hair-tab" data-bs-toggle="pill" data-bs-target="#head-hair" type="button" role="tab">
+                                            <i class="fas fa-cut"></i> Hair
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="head-face-tab" data-bs-toggle="pill" data-bs-target="#head-face" type="button" role="tab">
+                                            <i class="fas fa-smile"></i> Face
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="head-accessories-tab" data-bs-toggle="pill" data-bs-target="#head-accessories" type="button" role="tab">
+                                            <i class="fas fa-glasses"></i> Accessories
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <!-- Head Sub-tabs Content -->
+                                <div class="tab-content" id="headTabsContent">
+                                    <!-- Head Shape Sub-tab -->
+                                    <div class="tab-pane fade show active" id="head-shape" role="tabpanel">
+                                        <!-- Head Shape -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Head Shape</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="round">
+                                                    <i class="fas fa-circle"></i> Round
+                                                </button>
+                                                <button class="option-btn" data-value="oval">
+                                                    <i class="fas fa-egg"></i> Oval
+                                                </button>
+                                                <button class="option-btn" data-value="square">
+                                                    <i class="fas fa-square"></i> Square
+                                                </button>
+                                                <button class="option-btn" data-value="heart">
+                                                    <i class="fas fa-heart"></i> Heart
+                                                </button>
+                                                <button class="option-btn" data-value="triangular">
+                                                    <i class="fas fa-play"></i> Triangular
+                                                </button>
+                                                <button class="option-btn" data-value="diamond">
+                                                    <i class="fas fa-gem"></i> Diamond
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hair Sub-tab -->
+                                    <div class="tab-pane fade" id="head-hair" role="tabpanel">
+                                        <!-- Hair Style -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Hair Style</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="short">
+                                                    <i class="fas fa-cut fa-2x"></i>
+                                                    <span>Short</span>
+                                                </button>
+                                                <button class="option-btn" data-value="long">
+                                                    <i class="fas fa-cut fa-2x"></i>
+                                                    <span>Long</span>
+                                                </button>
+                                                <button class="option-btn" data-value="curly">
+                                                    <i class="fas fa-cut fa-2x"></i>
+                                                    <span>Curly</span>
+                                                </button>
+                                                <button class="option-btn" data-value="wavy">
+                                                    <i class="fas fa-cut fa-2x"></i>
+                                                    <span>Wavy</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Hair Color -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Hair Color</label>
+                                            <div class="color-grid">
+                                                <button class="color-btn" data-value="black" style="background-color: #000000;" title="Black"></button>
+                                                <button class="color-btn" data-value="dark brown" style="background-color: #3B2F2F;" title="Dark Brown"></button>
+                                                <button class="color-btn" data-value="brown" style="background-color: #8B4513;" title="Brown"></button>
+                                                <button class="color-btn" data-value="light brown" style="background-color: #A67B5B;" title="Light Brown"></button>
+                                                <button class="color-btn" data-value="blonde" style="background-color: #FFD700;" title="Blonde"></button>
+                                                <button class="color-btn" data-value="platinum blonde" style="background-color: #FAFAD2;" title="Platinum Blonde"></button>
+                                                <button class="color-btn" data-value="red" style="background-color: #FF0000;" title="Red"></button>
+                                                <button class="color-btn" data-value="auburn" style="background-color: #A52A2A;" title="Auburn"></button>
+                                                <button class="color-btn" data-value="white" style="background-color: #FFFFFF;" title="White"></button>
+                                                <button class="color-btn" data-value="silver" style="background-color: #C0C0C0;" title="Silver"></button>
+                                                <button class="color-btn" data-value="blue" style="background-color: #0000FF;" title="Blue"></button>
+                                                <button class="color-btn" data-value="pink" style="background-color: #FFC0CB;" title="Pink"></button>
+                                                <button class="color-btn" data-value="purple" style="background-color: #800080;" title="Purple"></button>
+                                                <button class="color-btn" data-value="green" style="background-color: #008000;" title="Green"></button>
+                                                <button class="color-btn" data-value="orange" style="background-color: #FFA500;" title="Orange"></button>
+                                                <button class="color-btn" data-value="rainbow" style="background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);" title="Rainbow"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Face Sub-tab -->
+                                    <div class="tab-pane fade" id="head-face" role="tabpanel">
+                                        <!-- Eyes -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Eyes</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="almond">
+                                                    <i class="fas fa-eye"></i> Almond
+                                                </button>
+                                                <button class="option-btn" data-value="round">
+                                                    <i class="fas fa-circle"></i> Round
+                                                </button>
+                                                <button class="option-btn" data-value="narrow">
+                                                    <i class="fas fa-minus"></i> Narrow
+                                                </button>
+                                                <button class="option-btn" data-value="upturned">
+                                                    <i class="fas fa-arrow-up"></i> Upturned
+                                                </button>
+                                                <button class="option-btn" data-value="downturned">
+                                                    <i class="fas fa-arrow-down"></i> Downturned
+                                                </button>
+                                                <button class="option-btn" data-value="deep-set">
+                                                    <i class="fas fa-eye"></i> Deep-set
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Eye Color -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Eye Color</label>
+                                            <div class="color-grid">
+                                                <button class="color-btn" data-value="brown" style="background-color: #8B4513;" title="Brown"></button>
+                                                <button class="color-btn" data-value="hazel" style="background-color: #C0C0C0;" title="Hazel"></button>
+                                                <button class="color-btn" data-value="amber" style="background-color: #FFBF00;" title="Amber"></button>
+                                                <button class="color-btn" data-value="green" style="background-color: #008000;" title="Green"></button>
+                                                <button class="color-btn" data-value="blue" style="background-color: #0000FF;" title="Blue"></button>
+                                                <button class="color-btn" data-value="gray" style="background-color: #808080;" title="Gray"></button>
+                                                <button class="color-btn" data-value="violet" style="background-color: #8A2BE2;" title="Violet"></button>
+                                                <button class="color-btn" data-value="red" style="background-color: #FF0000;" title="Red"></button>
+                                                <button class="color-btn" data-value="heterochromia" style="background: linear-gradient(to right, #0000FF, #FF0000);" title="Heterochromia"></button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ears -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Ears</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="normal">
+                                                    <i class="fas fa-ear"></i> Normal
+                                                </button>
+                                                <button class="option-btn" data-value="pointed">
+                                                    <i class="fas fa-arrow-up"></i> Pointed
+                                                </button>
+                                                <button class="option-btn" data-value="large">
+                                                    <i class="fas fa-volume-up"></i> Large
+                                                </button>
+                                                <button class="option-btn" data-value="small">
+                                                    <i class="fas fa-volume-down"></i> Small
+                                                </button>
+                                                <button class="option-btn" data-value="elven">
+                                                    <i class="fas fa-magic"></i> Elven
+                                                </button>
+                                                <button class="option-btn" data-value="animal">
+                                                    <i class="fas fa-paw"></i> Animal
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nose -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Nose</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="straight">
+                                                    <i class="fas fa-minus"></i> Straight
+                                                </button>
+                                                <button class="option-btn" data-value="roman">
+                                                    <i class="fas fa-archway"></i> Roman
+                                                </button>
+                                                <button class="option-btn" data-value="button">
+                                                    <i class="fas fa-circle"></i> Button
+                                                </button>
+                                                <button class="option-btn" data-value="nubian">
+                                                    <i class="fas fa-arrow-down"></i> Nubian
+                                                </button>
+                                                <button class="option-btn" data-value="snub">
+                                                    <i class="fas fa-arrow-up"></i> Snub
+                                                </button>
+                                                <button class="option-btn" data-value="aquiline">
+                                                    <i class="fas fa-feather"></i> Aquiline
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Mouth -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Mouth</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="full">
+                                                    <i class="fas fa-lips"></i> Full
+                                                </button>
+                                                <button class="option-btn" data-value="thin">
+                                                    <i class="fas fa-minus"></i> Thin
+                                                </button>
+                                                <button class="option-btn" data-value="wide">
+                                                    <i class="fas fa-arrows-alt-h"></i> Wide
+                                                </button>
+                                                <button class="option-btn" data-value="small">
+                                                    <i class="fas fa-compress"></i> Small
+                                                </button>
+                                                <button class="option-btn" data-value="bow-shaped">
+                                                    <i class="fas fa-bow"></i> Bow-shaped
+                                                </button>
+                                                <button class="option-btn" data-value="heart-shaped">
+                                                    <i class="fas fa-heart"></i> Heart-shaped
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Head Accessories Sub-tab -->
+                                    <div class="tab-pane fade" id="head-accessories" role="tabpanel">
+                                        <!-- Facial Features -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Facial Features</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn multi-select" data-value="glasses">
+                                                    <i class="fas fa-glasses fa-2x"></i>
+                                                    <span>Glasses</span>
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="beard">
+                                                    <i class="fas fa-user fa-2x"></i>
+                                                    <span>Beard</span>
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="freckles">
+                                                    <i class="fas fa-dot-circle fa-2x"></i>
+                                                    <span>Freckles</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Head Accessories -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Head Accessories</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn multi-select" data-value="glasses">
+                                                    <i class="fas fa-glasses"></i> Glasses
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="sunglasses">
+                                                    <i class="fas fa-sun"></i> Sunglasses
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="headband">
+                                                    <i class="fas fa-headband"></i> Headband
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="earrings">
+                                                    <i class="fas fa-ring"></i> Earrings
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="ear cuffs">
+                                                    <i class="fas fa-crown"></i> Ear Cuffs
+                                                </button>
+                                                <button class="option-btn multi-select" data-value="ear plugs">
+                                                    <i class="fas fa-plug"></i> Ear Plugs
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Body Tab -->
+                            <div class="tab-pane fade" id="body" role="tabpanel">
+                                <!-- Body Proportions -->
+                                <div class="mb-4">
+                                    <label class="form-label">Body Proportions</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="average">
+                                            <i class="fas fa-user"></i> Average
+                                        </button>
+                                        <button class="option-btn" data-value="tall">
+                                            <i class="fas fa-arrow-up"></i> Tall
+                                        </button>
+                                        <button class="option-btn" data-value="short">
+                                            <i class="fas fa-arrow-down"></i> Short
+                                        </button>
+                                        <button class="option-btn" data-value="petite">
+                                            <i class="fas fa-compress"></i> Petite
+                                        </button>
+                                        <button class="option-btn" data-value="large">
+                                            <i class="fas fa-expand"></i> Large
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Body Features -->
+                                <div class="mb-4">
+                                    <label class="form-label">Body Features</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn multi-select" data-value="muscular">
+                                            <i class="fas fa-dumbbell"></i> Muscular
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="slim">
+                                            <i class="fas fa-user"></i> Slim
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="curvy">
+                                            <i class="fas fa-female"></i> Curvy
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="athletic">
+                                            <i class="fas fa-running"></i> Athletic
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="broad shoulders">
+                                            <i class="fas fa-user"></i> Broad Shoulders
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="long limbs">
+                                            <i class="fas fa-arrows-alt-v"></i> Long Limbs
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Skin Tone -->
+                                <div class="mb-4">
+                                    <label class="form-label">Skin Tone</label>
+                                    <div class="color-grid">
+                                        <button class="color-btn" data-value="porcelain" style="background-color: #FFF5EE;" title="Porcelain"></button>
+                                        <button class="color-btn" data-value="fair" style="background-color: #FFE4C4;" title="Fair"></button>
+                                        <button class="color-btn" data-value="light" style="background-color: #F5DEB3;" title="Light"></button>
+                                        <button class="color-btn" data-value="medium" style="background-color: #DEB887;" title="Medium"></button>
+                                        <button class="color-btn" data-value="olive" style="background-color: #808000;" title="Olive"></button>
+                                        <button class="color-btn" data-value="tan" style="background-color: #D2B48C;" title="Tan"></button>
+                                        <button class="color-btn" data-value="caramel" style="background-color: #C68E17;" title="Caramel"></button>
+                                        <button class="color-btn" data-value="bronze" style="background-color: #CD7F32;" title="Bronze"></button>
+                                        <button class="color-btn" data-value="brown" style="background-color: #8B4513;" title="Brown"></button>
+                                        <button class="color-btn" data-value="dark brown" style="background-color: #654321;" title="Dark Brown"></button>
+                                        <button class="color-btn" data-value="mahogany" style="background-color: #4E0707;" title="Mahogany"></button>
+                                        <button class="color-btn" data-value="ebony" style="background-color: #2C1810;" title="Ebony"></button>
+                                        <button class="color-btn" data-value="blue" style="background-color: #1E90FF;" title="Blue"></button>
+                                        <button class="color-btn" data-value="green" style="background-color: #32CD32;" title="Green"></button>
+                                        <button class="color-btn" data-value="purple" style="background-color: #800080;" title="Purple"></button>
+                                        <button class="color-btn" data-value="gray" style="background-color: #808080;" title="Gray"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Clothing Tab -->
+                            <div class="tab-pane fade" id="clothing" role="tabpanel">
+                                <!-- Clothing Style -->
+                                <div class="mb-4">
+                                    <label class="form-label">Clothing Style</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="casual">
+                                            <i class="fas fa-tshirt fa-2x"></i>
+                                            <span>Casual</span>
+                                        </button>
+                                        <button class="option-btn" data-value="formal">
+                                            <i class="fas fa-user-tie fa-2x"></i>
+                                            <span>Formal</span>
+                                        </button>
+                                        <button class="option-btn" data-value="fantasy">
+                                            <i class="fas fa-hat-wizard fa-2x"></i>
+                                            <span>Fantasy</span>
+                                        </button>
+                                        <button class="option-btn" data-value="sci-fi">
+                                            <i class="fas fa-robot fa-2x"></i>
+                                            <span>Sci-Fi</span>
+                                        </button>
+                                        <button class="option-btn" data-value="military">
+                                            <i class="fas fa-shield-alt fa-2x"></i>
+                                            <span>Military</span>
+                                        </button>
+                                        <button class="option-btn" data-value="sports">
+                                            <i class="fas fa-running fa-2x"></i>
+                                            <span>Sports</span>
+                                        </button>
+                                        <button class="option-btn" data-value="traditional">
+                                            <i class="fas fa-vest fa-2x"></i>
+                                            <span>Traditional</span>
+                                        </button>
+                                        <button class="option-btn" data-value="gothic">
+                                            <i class="fas fa-skull fa-2x"></i>
+                                            <span>Gothic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="steampunk">
+                                            <i class="fas fa-cog fa-2x"></i>
+                                            <span>Steampunk</span>
+                                        </button>
+                                        <button class="option-btn" data-value="cyberpunk">
+                                            <i class="fas fa-microchip fa-2x"></i>
+                                            <span>Cyberpunk</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Fabric Type -->
+                                <div class="mb-4">
+                                    <label class="form-label">Fabric Type</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="cotton">
+                                            <i class="fas fa-tshirt fa-2x"></i>
+                                            <span>Cotton</span>
+                                        </button>
+                                        <button class="option-btn" data-value="silk">
+                                            <i class="fas fa-scroll fa-2x"></i>
+                                            <span>Silk</span>
+                                        </button>
+                                        <button class="option-btn" data-value="leather">
+                                            <i class="fas fa-hat-cowboy fa-2x"></i>
+                                            <span>Leather</span>
+                                        </button>
+                                        <button class="option-btn" data-value="denim">
+                                            <i class="fas fa-vest fa-2x"></i>
+                                            <span>Denim</span>
+                                        </button>
+                                        <button class="option-btn" data-value="wool">
+                                            <i class="fas fa-snowflake fa-2x"></i>
+                                            <span>Wool</span>
+                                        </button>
+                                        <button class="option-btn" data-value="synthetic">
+                                            <i class="fas fa-atom fa-2x"></i>
+                                            <span>Synthetic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="metallic">
+                                            <i class="fas fa-coins fa-2x"></i>
+                                            <span>Metallic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="chainmail">
+                                            <i class="fas fa-link fa-2x"></i>
+                                            <span>Chainmail</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Fabric Color -->
+                                <div class="mb-4">
+                                    <label class="form-label">Fabric Color</label>
+                                    <div class="color-grid">
+                                        <button class="color-btn" data-value="black" style="background-color: #000000;" title="Black"></button>
+                                        <button class="color-btn" data-value="white" style="background-color: #FFFFFF;" title="White"></button>
+                                        <button class="color-btn" data-value="red" style="background-color: #FF0000;" title="Red"></button>
+                                        <button class="color-btn" data-value="blue" style="background-color: #0000FF;" title="Blue"></button>
+                                        <button class="color-btn" data-value="green" style="background-color: #008000;" title="Green"></button>
+                                        <button class="color-btn" data-value="purple" style="background-color: #800080;" title="Purple"></button>
+                                        <button class="color-btn" data-value="gold" style="background-color: #FFD700;" title="Gold"></button>
+                                        <button class="color-btn" data-value="silver" style="background-color: #C0C0C0;" title="Silver"></button>
+                                        <button class="color-btn" data-value="bronze" style="background-color: #CD7F32;" title="Bronze"></button>
+                                        <button class="color-btn" data-value="metallic blue" style="background: linear-gradient(45deg, #0000FF, #00FFFF);" title="Metallic Blue"></button>
+                                        <button class="color-btn" data-value="metallic red" style="background: linear-gradient(45deg, #FF0000, #FFA500);" title="Metallic Red"></button>
+                                        <button class="color-btn" data-value="iridescent" style="background: linear-gradient(45deg, #FF0000, #00FF00, #0000FF);" title="Iridescent"></button>
+                                    </div>
+                                </div>
+
+                                <!-- Stitching Details -->
+                                <div class="mb-4">
+                                    <label class="form-label">Stitching Details</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn multi-select" data-value="embroidery">
+                                            <i class="fas fa-pen-fancy fa-2x"></i>
+                                            <span>Embroidery</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="gold thread">
+                                            <i class="fas fa-thread fa-2x"></i>
+                                            <span>Gold Thread</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="silver thread">
+                                            <i class="fas fa-thread fa-2x"></i>
+                                            <span>Silver Thread</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="cross stitch">
+                                            <i class="fas fa-plus fa-2x"></i>
+                                            <span>Cross Stitch</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="zigzag">
+                                            <i class="fas fa-wave-square fa-2x"></i>
+                                            <span>Zigzag</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Clothing Accessories -->
+                                <div class="mb-4">
+                                    <label class="form-label">Clothing Accessories</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn multi-select" data-value="belt">
+                                            <i class="fas fa-belt fa-2x"></i>
+                                            <span>Belt</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="cape">
+                                            <i class="fas fa-vest fa-2x"></i>
+                                            <span>Cape</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="gloves">
+                                            <i class="fas fa-mitten fa-2x"></i>
+                                            <span>Gloves</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="scarf">
+                                            <i class="fas fa-scarf fa-2x"></i>
+                                            <span>Scarf</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="tie">
+                                            <i class="fas fa-user-tie fa-2x"></i>
+                                            <span>Tie</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="bow tie">
+                                            <i class="fas fa-user-tie fa-2x"></i>
+                                            <span>Bow Tie</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="pocket watch">
+                                            <i class="fas fa-clock fa-2x"></i>
+                                            <span>Pocket Watch</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="jewelry">
+                                            <i class="fas fa-gem fa-2x"></i>
+                                            <span>Jewelry</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pose Tab -->
+                            <div class="tab-pane fade" id="pose" role="tabpanel">
+                                <!-- Pose Sub-tabs Navigation -->
+                                <ul class="nav nav-pills mb-3" id="poseTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="body-pose-tab" data-bs-toggle="pill" data-bs-target="#body-pose" type="button" role="tab">
+                                            <i class="fas fa-user"></i> Body Pose
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="arm-pose-tab" data-bs-toggle="pill" data-bs-target="#arm-pose" type="button" role="tab">
+                                            <i class="fas fa-hand"></i> Arm Pose
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="hand-pose-tab" data-bs-toggle="pill" data-bs-target="#hand-pose" type="button" role="tab">
+                                            <i class="fas fa-hand-paper"></i> Hand Gestures
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="leg-pose-tab" data-bs-toggle="pill" data-bs-target="#leg-pose" type="button" role="tab">
+                                            <i class="fas fa-walking"></i> Leg Pose
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <!-- Pose Sub-tabs Content -->
+                                <div class="tab-content" id="poseTabsContent">
+                                    <!-- Body Pose Sub-tab -->
+                                    <div class="tab-pane fade show active" id="body-pose" role="tabpanel">
+                                        <!-- Body Pose -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Body Pose</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="standing">
+                                                    <i class="fas fa-user fa-2x"></i>
+                                                    <span>Standing</span>
+                                                </button>
+                                                <button class="option-btn" data-value="sitting">
+                                                    <i class="fas fa-chair fa-2x"></i>
+                                                    <span>Sitting</span>
+                                                </button>
+                                                <button class="option-btn" data-value="walking">
+                                                    <i class="fas fa-walking fa-2x"></i>
+                                                    <span>Walking</span>
+                                                </button>
+                                                <button class="option-btn" data-value="running">
+                                                    <i class="fas fa-running fa-2x"></i>
+                                                    <span>Running</span>
+                                                </button>
+                                                <button class="option-btn" data-value="jumping">
+                                                    <i class="fas fa-child fa-2x"></i>
+                                                    <span>Jumping</span>
+                                                </button>
+                                                <button class="option-btn" data-value="crouching">
+                                                    <i class="fas fa-user fa-2x"></i>
+                                                    <span>Crouching</span>
+                                                </button>
+                                                <button class="option-btn" data-value="dancing">
+                                                    <i class="fas fa-music fa-2x"></i>
+                                                    <span>Dancing</span>
+                                                </button>
+                                                <button class="option-btn" data-value="fighting">
+                                                    <i class="fas fa-fist-raised fa-2x"></i>
+                                                    <span>Fighting</span>
+                                                </button>
+                                                <button class="option-btn" data-value="flying">
+                                                    <i class="fas fa-wind fa-2x"></i>
+                                                    <span>Flying</span>
+                                                </button>
+                                                <button class="option-btn" data-value="swimming">
+                                                    <i class="fas fa-swimming-pool fa-2x"></i>
+                                                    <span>Swimming</span>
+                                                </button>
+                                                <button class="option-btn" data-value="yoga">
+                                                    <i class="fas fa-spa fa-2x"></i>
+                                                    <span>Yoga</span>
+                                                </button>
+                                                <button class="option-btn" data-value="sleeping">
+                                                    <i class="fas fa-bed fa-2x"></i>
+                                                    <span>Sleeping</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Arm Pose Sub-tab -->
+                                    <div class="tab-pane fade" id="arm-pose" role="tabpanel">
+                                        <!-- Arm Pose -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Arm Pose</label>
+                                            <div class="pose-options">
+                                                <!-- Mode Switch -->
+                                                <div class="mode-switch mb-3">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="armPoseModeSwitch">
+                                                        <label class="form-check-label" for="armPoseModeSwitch">Individual Mode</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Both Arms Options -->
+                                                <div class="both-options mb-3 p-3 bg-light rounded">
+                                                    <h6 class="text-muted mb-2">Both Arms</h6>
+                                                    <div class="option-grid">
+                                                        <button class="option-btn both-option" data-value="both arms down">
+                                                            <i class="fas fa-user fa-2x"></i>
+                                                            <span>Both Arms Down</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms crossed">
+                                                            <i class="fas fa-user fa-2x"></i>
+                                                            <span>Both Arms Crossed</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms up">
+                                                            <i class="fas fa-hands-up fa-2x"></i>
+                                                            <span>Both Arms Up</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="arms akimbo">
+                                                            <i class="fas fa-user fa-2x"></i>
+                                                            <span>Arms Akimbo</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms behind head">
+                                                            <i class="fas fa-user fa-2x"></i>
+                                                            <span>Arms Behind Head</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms prayer">
+                                                            <i class="fas fa-pray fa-2x"></i>
+                                                            <span>Prayer Pose</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms victory">
+                                                            <i class="fas fa-hand-peace fa-2x"></i>
+                                                            <span>Victory Pose</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms surrender">
+                                                            <i class="fas fa-hands-up fa-2x"></i>
+                                                            <span>Surrender Pose</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms hugging">
+                                                            <i class="fas fa-hands fa-2x"></i>
+                                                            <span>Hugging Pose</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms dancing">
+                                                            <i class="fas fa-music fa-2x"></i>
+                                                            <span>Dancing Arms</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms flexing">
+                                                            <i class="fas fa-dumbbell fa-2x"></i>
+                                                            <span>Flexing Arms</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both arms yoga">
+                                                            <i class="fas fa-spa fa-2x"></i>
+                                                            <span>Yoga Pose</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Individual Arm Options -->
+                                                <div class="individual-options p-3 bg-light rounded" style="display: none;">
+                                                    <h6 class="text-muted mb-2">Individual Arms</h6>
+                                                    <div class="row">
+                                                        <!-- Left Arm Column -->
+                                                        <div class="col-6">
+                                                            <h6 class="text-center mb-3">Left Arm</h6>
+                                                            <div class="option-grid">
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm raised">
+                                                                    <i class="fas fa-hand-point-up fa-2x"></i>
+                                                                    <span>Arm Raised</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm forward">
+                                                                    <i class="fas fa-hand-point-right fa-2x"></i>
+                                                                    <span>Arm Forward</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm behind back">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm Behind Back</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm on hip">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm on Hip</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm crossed">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm Crossed</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm bent">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm Bent</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm flexing">
+                                                                    <i class="fas fa-dumbbell fa-2x"></i>
+                                                                    <span>Arm Flexing</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm waving">
+                                                                    <i class="fas fa-hand-wave fa-2x"></i>
+                                                                    <span>Arm Waving</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm pointing up">
+                                                                    <i class="fas fa-hand-point-up fa-2x"></i>
+                                                                    <span>Arm Pointing Up</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-arm" data-value="left arm pointing down">
+                                                                    <i class="fas fa-hand-point-down fa-2x"></i>
+                                                                    <span>Arm Pointing Down</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Right Arm Column -->
+                                                        <div class="col-6">
+                                                            <h6 class="text-center mb-3">Right Arm</h6>
+                                                            <div class="option-grid">
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm raised">
+                                                                    <i class="fas fa-hand-point-up fa-2x"></i>
+                                                                    <span>Arm Raised</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm forward">
+                                                                    <i class="fas fa-hand-point-right fa-2x"></i>
+                                                                    <span>Arm Forward</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm behind back">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm Behind Back</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm on hip">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm on Hip</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm crossed">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm Crossed</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm bent">
+                                                                    <i class="fas fa-user fa-2x"></i>
+                                                                    <span>Arm Bent</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm flexing">
+                                                                    <i class="fas fa-dumbbell fa-2x"></i>
+                                                                    <span>Arm Flexing</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm waving">
+                                                                    <i class="fas fa-hand-wave fa-2x"></i>
+                                                                    <span>Arm Waving</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm pointing up">
+                                                                    <i class="fas fa-hand-point-up fa-2x"></i>
+                                                                    <span>Arm Pointing Up</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-arm" data-value="right arm pointing down">
+                                                                    <i class="fas fa-hand-point-down fa-2x"></i>
+                                                                    <span>Arm Pointing Down</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hand Gestures Sub-tab -->
+                                    <div class="tab-pane fade" id="hand-pose" role="tabpanel">
+                                        <!-- Hand Gestures -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Hand Gestures</label>
+                                            <div class="pose-options">
+                                                <!-- Mode Switch -->
+                                                <div class="mode-switch mb-3">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="handGestureModeSwitch">
+                                                        <label class="form-check-label" for="handGestureModeSwitch">Individual Mode</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Both Hands Options -->
+                                                <div class="both-options mb-3 p-3 bg-light rounded">
+                                                    <h6 class="text-muted mb-2">Both Hands</h6>
+                                                    <div class="option-grid">
+                                                        <button class="option-btn both-option" data-value="both hands open">
+                                                            <i class="fas fa-hand-paper fa-2x"></i>
+                                                            <span>Both Hands Open</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both hands fists">
+                                                            <i class="fas fa-hand-rock fa-2x"></i>
+                                                            <span>Both Hands Fists</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both hands peace">
+                                                            <i class="fas fa-peace fa-2x"></i>
+                                                            <span>Both Hands Peace</span>
+                                                        </button>
+                                                        <button class="option-btn both-option" data-value="both hands prayer">
+                                                            <i class="fas fa-pray fa-2x"></i>
+                                                            <span>Prayer Hands</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Individual Hand Options -->
+                                                <div class="individual-options p-3 bg-light rounded" style="display: none;">
+                                                    <h6 class="text-muted mb-2">Individual Hands</h6>
+                                                    <div class="row">
+                                                        <!-- Left Hand Column -->
+                                                        <div class="col-6">
+                                                            <h6 class="text-center mb-3">Left Hand</h6>
+                                                            <div class="option-grid">
+                                                                <button class="option-btn individual-option left-hand" data-value="left hand open">
+                                                                    <i class="fas fa-hand-paper fa-2x fa-flip-horizontal"></i>
+                                                                    <span>Hand Open</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-hand" data-value="left hand fist">
+                                                                    <i class="fas fa-hand-rock fa-2x fa-flip-horizontal"></i>
+                                                                    <span>Hand Fist</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-hand" data-value="left hand peace">
+                                                                    <i class="fas fa-peace fa-2x fa-flip-horizontal"></i>
+                                                                    <span>Peace Sign</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-hand" data-value="left hand pointing">
+                                                                    <i class="fas fa-hand-point-left fa-2x"></i>
+                                                                    <span>Pointing</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-hand" data-value="left hand thumbs up">
+                                                                    <i class="fas fa-thumbs-up fa-2x fa-flip-horizontal"></i>
+                                                                    <span>Thumbs Up</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option left-hand" data-value="left hand thumbs down">
+                                                                    <i class="fas fa-thumbs-down fa-2x fa-flip-horizontal"></i>
+                                                                    <span>Thumbs Down</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Right Hand Column -->
+                                                        <div class="col-6">
+                                                            <h6 class="text-center mb-3">Right Hand</h6>
+                                                            <div class="option-grid">
+                                                                <button class="option-btn individual-option right-hand" data-value="right hand open">
+                                                                    <i class="fas fa-hand-paper fa-2x"></i>
+                                                                    <span>Hand Open</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-hand" data-value="right hand fist">
+                                                                    <i class="fas fa-hand-rock fa-2x"></i>
+                                                                    <span>Hand Fist</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-hand" data-value="right hand peace">
+                                                                    <i class="fas fa-peace fa-2x"></i>
+                                                                    <span>Peace Sign</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-hand" data-value="right hand pointing">
+                                                                    <i class="fas fa-hand-point-right fa-2x"></i>
+                                                                    <span>Pointing</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-hand" data-value="right hand thumbs up">
+                                                                    <i class="fas fa-thumbs-up fa-2x"></i>
+                                                                    <span>Thumbs Up</span>
+                                                                </button>
+                                                                <button class="option-btn individual-option right-hand" data-value="right hand thumbs down">
+                                                                    <i class="fas fa-thumbs-down fa-2x"></i>
+                                                                    <span>Thumbs Down</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Leg Pose Sub-tab -->
+                                    <div class="tab-pane fade" id="leg-pose" role="tabpanel">
+                                        <!-- Leg Pose -->
+                                        <div class="mb-4">
+                                            <label class="form-label">Leg Pose</label>
+                                            <div class="option-grid">
+                                                <button class="option-btn" data-value="standing straight">
+                                                    <i class="fas fa-user fa-2x"></i>
+                                                    <span>Standing Straight</span>
+                                                </button>
+                                                <button class="option-btn" data-value="left leg forward">
+                                                    <i class="fas fa-walking fa-2x"></i>
+                                                    <span>Left Leg Forward</span>
+                                                </button>
+                                                <button class="option-btn" data-value="right leg forward">
+                                                    <i class="fas fa-walking fa-2x"></i>
+                                                    <span>Right Leg Forward</span>
+                                                </button>
+                                                <button class="option-btn" data-value="legs crossed">
+                                                    <i class="fas fa-user fa-2x"></i>
+                                                    <span>Legs Crossed</span>
+                                                </button>
+                                                <button class="option-btn" data-value="left leg raised">
+                                                    <i class="fas fa-running fa-2x"></i>
+                                                    <span>Left Leg Raised</span>
+                                                </button>
+                                                <button class="option-btn" data-value="right leg raised">
+                                                    <i class="fas fa-running fa-2x"></i>
+                                                    <span>Right Leg Raised</span>
+                                                </button>
+                                                <button class="option-btn" data-value="kneeling">
+                                                    <i class="fas fa-user fa-2x"></i>
+                                                    <span>Kneeling</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Style Tab -->
+                            <div class="tab-pane fade" id="style" role="tabpanel">
+                                <!-- Art Style -->
+                                <div class="mb-4">
+                                    <label class="form-label">Art Style</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="realistic">
+                                            <i class="fas fa-camera fa-2x"></i>
+                                            <span>Realistic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="3d">
+                                            <i class="fas fa-cube fa-2x"></i>
+                                            <span>3D</span>
+                                        </button>
+                                        <button class="option-btn" data-value="clay render">
+                                            <i class="fas fa-dice-d20 fa-2x"></i>
+                                            <span>Clay Render</span>
+                                        </button>
+                                        <button class="option-btn" data-value="anime">
+                                            <i class="fas fa-paint-brush fa-2x"></i>
+                                            <span>Anime</span>
+                                        </button>
+                                        <button class="option-btn" data-value="cartoon">
+                                            <i class="fas fa-pencil-alt fa-2x"></i>
+                                            <span>Cartoon</span>
+                                        </button>
+                                        <button class="option-btn" data-value="pixel-art">
+                                            <i class="fas fa-th fa-2x"></i>
+                                            <span>Pixel Art</span>
+                                        </button>
+                                        <button class="option-btn" data-value="watercolor">
+                                            <i class="fas fa-paint-brush fa-2x"></i>
+                                            <span>Watercolor</span>
+                                        </button>
+                                        <button class="option-btn" data-value="oil painting">
+                                            <i class="fas fa-palette fa-2x"></i>
+                                            <span>Oil Painting</span>
+                                        </button>
+                                        <button class="option-btn" data-value="sketch">
+                                            <i class="fas fa-pencil fa-2x"></i>
+                                            <span>Sketch</span>
+                                        </button>
+                                        <button class="option-btn" data-value="digital art">
+                                            <i class="fas fa-laptop fa-2x"></i>
+                                            <span>Digital Art</span>
+                                        </button>
+                                        <button class="option-btn" data-value="low poly">
+                                            <i class="fas fa-shapes fa-2x"></i>
+                                            <span>Low Poly</span>
+                                        </button>
+                                        <button class="option-btn" data-value="stylized">
+                                            <i class="fas fa-magic fa-2x"></i>
+                                            <span>Stylized</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Camera Tab -->
+                            <div class="tab-pane fade" id="camera" role="tabpanel">
+                                <!-- Layout & Composition -->
+                                <div class="mb-4">
+                                    <label class="form-label">Layout & Composition</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="portrait">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>Portrait</span>
+                                        </button>
+                                        <button class="option-btn" data-value="landscape">
+                                            <i class="fas fa-image fa-2x"></i>
+                                            <span>Landscape</span>
+                                        </button>
+                                        <button class="option-btn" data-value="square">
+                                            <i class="fas fa-crop-alt fa-2x"></i>
+                                            <span>Square</span>
+                                        </button>
+                                        <button class="option-btn" data-value="cinematic">
+                                            <i class="fas fa-video fa-2x"></i>
+                                            <span>Cinematic</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Aspect Ratio -->
+                                <div class="mb-4">
+                                    <label class="form-label">Aspect Ratio</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="1:1">
+                                            <i class="fas fa-crop-alt fa-2x"></i>
+                                            <span>1:1</span>
+                                        </button>
+                                        <button class="option-btn" data-value="4:3">
+                                            <i class="fas fa-crop fa-2x"></i>
+                                            <span>4:3</span>
+                                        </button>
+                                        <button class="option-btn" data-value="16:9">
+                                            <i class="fas fa-film fa-2x"></i>
+                                            <span>16:9</span>
+                                        </button>
+                                        <button class="option-btn" data-value="21:9">
+                                            <i class="fas fa-expand fa-2x"></i>
+                                            <span>21:9</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Screen Size -->
+                                <div class="mb-4">
+                                    <label class="form-label">Screen Size</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="4k">
+                                            <i class="fas fa-tv fa-2x"></i>
+                                            <span>4K (3840x2160)</span>
+                                        </button>
+                                        <button class="option-btn" data-value="2k">
+                                            <i class="fas fa-tv fa-2x"></i>
+                                            <span>2K (2560x1440)</span>
+                                        </button>
+                                        <button class="option-btn" data-value="1080p">
+                                            <i class="fas fa-tv fa-2x"></i>
+                                            <span>1080p (1920x1080)</span>
+                                        </button>
+                                        <button class="option-btn" data-value="720p">
+                                            <i class="fas fa-tv fa-2x"></i>
+                                            <span>720p (1280x720)</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Camera Angle -->
+                                <div class="mb-4">
+                                    <label class="form-label">Camera Angle</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="front view">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>Front View</span>
+                                        </button>
+                                        <button class="option-btn" data-value="side view">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>Side View</span>
+                                        </button>
+                                        <button class="option-btn" data-value="three-quarter view">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <span>3/4 View</span>
+                                        </button>
+                                        <button class="option-btn" data-value="bird's eye view">
+                                            <i class="fas fa-arrow-down fa-2x"></i>
+                                            <span>Bird's Eye</span>
+                                        </button>
+                                        <button class="option-btn" data-value="worm's eye view">
+                                            <i class="fas fa-arrow-up fa-2x"></i>
+                                            <span>Worm's Eye</span>
+                                        </button>
+                                        <button class="option-btn" data-value="dutch angle">
+                                            <i class="fas fa-sync fa-2x"></i>
+                                            <span>Dutch Angle</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Camera Treatment -->
+                                <div class="mb-4">
+                                    <label class="form-label">Camera Treatment</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="wide shot">
+                                            <i class="fas fa-expand fa-2x"></i>
+                                            <span>Wide Shot</span>
+                                        </button>
+                                        <button class="option-btn" data-value="medium shot">
+                                            <i class="fas fa-compress fa-2x"></i>
+                                            <span>Medium Shot</span>
+                                        </button>
+                                        <button class="option-btn" data-value="close-up">
+                                            <i class="fas fa-search-plus fa-2x"></i>
+                                            <span>Close-up</span>
+                                        </button>
+                                        <button class="option-btn" data-value="extreme close-up">
+                                            <i class="fas fa-search fa-2x"></i>
+                                            <span>Extreme Close-up</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Camera Effects -->
+                                <div class="mb-4">
+                                    <label class="form-label">Camera Effects</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn multi-select" data-value="depth of field">
+                                            <i class="fas fa-camera fa-2x"></i>
+                                            <span>Depth of Field</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="motion blur">
+                                            <i class="fas fa-running fa-2x"></i>
+                                            <span>Motion Blur</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="lens flare">
+                                            <i class="fas fa-sun fa-2x"></i>
+                                            <span>Lens Flare</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="vignette">
+                                            <i class="fas fa-circle fa-2x"></i>
+                                            <span>Vignette</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="chromatic aberration">
+                                            <i class="fas fa-rainbow fa-2x"></i>
+                                            <span>Chromatic Aberration</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="film grain">
+                                            <i class="fas fa-film fa-2x"></i>
+                                            <span>Film Grain</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Lighting -->
+                                <div class="mb-4">
+                                    <label class="form-label">Lighting</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="natural lighting">
+                                            <i class="fas fa-sun fa-2x"></i>
+                                            <span>Natural</span>
+                                        </button>
+                                        <button class="option-btn" data-value="studio lighting">
+                                            <i class="fas fa-lightbulb fa-2x"></i>
+                                            <span>Studio</span>
+                                        </button>
+                                        <button class="option-btn" data-value="dramatic lighting">
+                                            <i class="fas fa-theater-masks fa-2x"></i>
+                                            <span>Dramatic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="rim lighting">
+                                            <i class="fas fa-circle-notch fa-2x"></i>
+                                            <span>Rim Light</span>
+                                        </button>
+                                        <button class="option-btn" data-value="backlighting">
+                                            <i class="fas fa-arrow-right fa-2x"></i>
+                                            <span>Backlight</span>
+                                        </button>
+                                        <button class="option-btn" data-value="three-point lighting">
+                                            <i class="fas fa-dot-circle fa-2x"></i>
+                                            <span>Three Point</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Background Tab -->
+                            <div class="tab-pane fade" id="background" role="tabpanel">
+                                <!-- Background Type -->
+                                <div class="mb-4">
+                                    <label class="form-label">Background Type</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="solid color">
+                                            <i class="fas fa-fill fa-2x"></i>
+                                            <span>Solid Color</span>
+                                        </button>
+                                        <button class="option-btn" data-value="gradient">
+                                            <i class="fas fa-gradient fa-2x"></i>
+                                            <span>Gradient</span>
+                                        </button>
+                                        <button class="option-btn" data-value="studio">
+                                            <i class="fas fa-camera fa-2x"></i>
+                                            <span>Studio</span>
+                                        </button>
+                                        <button class="option-btn" data-value="environment">
+                                            <i class="fas fa-mountain fa-2x"></i>
+                                            <span>Environment</span>
+                                        </button>
+                                        <button class="option-btn" data-value="abstract">
+                                            <i class="fas fa-shapes fa-2x"></i>
+                                            <span>Abstract</span>
+                                        </button>
+                                        <button class="option-btn" data-value="pattern">
+                                            <i class="fas fa-border-all fa-2x"></i>
+                                            <span>Pattern</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Background Color -->
+                                <div class="mb-4">
+                                    <label class="form-label">Background Color</label>
+                                    <div class="color-grid">
+                                        <button class="color-btn" data-value="white" style="background-color: #FFFFFF;" title="White"></button>
+                                        <button class="color-btn" data-value="black" style="background-color: #000000;" title="Black"></button>
+                                        <button class="color-btn" data-value="gray" style="background-color: #808080;" title="Gray"></button>
+                                        <button class="color-btn" data-value="light gray" style="background-color: #D3D3D3;" title="Light Gray"></button>
+                                        <button class="color-btn" data-value="dark gray" style="background-color: #404040;" title="Dark Gray"></button>
+                                        <button class="color-btn" data-value="beige" style="background-color: #F5F5DC;" title="Beige"></button>
+                                        <button class="color-btn" data-value="cream" style="background-color: #FFFDD0;" title="Cream"></button>
+                                        <button class="color-btn" data-value="pastel blue" style="background-color: #ADD8E6;" title="Pastel Blue"></button>
+                                        <button class="color-btn" data-value="pastel pink" style="background-color: #FFB6C1;" title="Pastel Pink"></button>
+                                        <button class="color-btn" data-value="pastel green" style="background-color: #98FB98;" title="Pastel Green"></button>
+                                    </div>
+                                </div>
+
+                                <!-- Environment Type -->
+                                <div class="mb-4">
+                                    <label class="form-label">Environment Type</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="urban">
+                                            <i class="fas fa-city fa-2x"></i>
+                                            <span>Urban</span>
+                                        </button>
+                                        <button class="option-btn" data-value="nature">
+                                            <i class="fas fa-tree fa-2x"></i>
+                                            <span>Nature</span>
+                                        </button>
+                                        <button class="option-btn" data-value="fantasy">
+                                            <i class="fas fa-dragon fa-2x"></i>
+                                            <span>Fantasy</span>
+                                        </button>
+                                        <button class="option-btn" data-value="sci-fi">
+                                            <i class="fas fa-robot fa-2x"></i>
+                                            <span>Sci-Fi</span>
+                                        </button>
+                                        <button class="option-btn" data-value="indoor">
+                                            <i class="fas fa-home fa-2x"></i>
+                                            <span>Indoor</span>
+                                        </button>
+                                        <button class="option-btn" data-value="abstract space">
+                                            <i class="fas fa-galaxy fa-2x"></i>
+                                            <span>Abstract Space</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Background Effects -->
+                                <div class="mb-4">
+                                    <label class="form-label">Background Effects</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn multi-select" data-value="blur">
+                                            <i class="fas fa-blur fa-2x"></i>
+                                            <span>Blur</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="bokeh">
+                                            <i class="fas fa-circle fa-2x"></i>
+                                            <span>Bokeh</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="noise">
+                                            <i class="fas fa-wave-square fa-2x"></i>
+                                            <span>Noise</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="glow">
+                                            <i class="fas fa-sun fa-2x"></i>
+                                            <span>Glow</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="particles">
+                                            <i class="fas fa-atom fa-2x"></i>
+                                            <span>Particles</span>
+                                        </button>
+                                        <button class="option-btn multi-select" data-value="gradient overlay">
+                                            <i class="fas fa-layer-group fa-2x"></i>
+                                            <span>Gradient Overlay</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Background Style -->
+                                <div class="mb-4">
+                                    <label class="form-label">Background Style</label>
+                                    <div class="option-grid">
+                                        <button class="option-btn" data-value="minimalist">
+                                            <i class="fas fa-minus fa-2x"></i>
+                                            <span>Minimalist</span>
+                                        </button>
+                                        <button class="option-btn" data-value="detailed">
+                                            <i class="fas fa-plus fa-2x"></i>
+                                            <span>Detailed</span>
+                                        </button>
+                                        <button class="option-btn" data-value="textured">
+                                            <i class="fas fa-texture fa-2x"></i>
+                                            <span>Textured</span>
+                                        </button>
+                                        <button class="option-btn" data-value="geometric">
+                                            <i class="fas fa-shapes fa-2x"></i>
+                                            <span>Geometric</span>
+                                        </button>
+                                        <button class="option-btn" data-value="organic">
+                                            <i class="fas fa-leaf fa-2x"></i>
+                                            <span>Organic</span>
+                                        </button>
+                                        <button class="option-btn" data-value="grunge">
+                                            <i class="fas fa-paint-roller fa-2x"></i>
+                                            <span>Grunge</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Form Section - Right Column -->
+            <div class="col-md-4">
+                <div class="card sticky-top" style="top: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Generated Prompt</h5>
+                        <div class="prompt-output p-3 bg-light rounded mb-3">
+                            <p id="generatedPrompt">Your prompt will appear here...</p>
+                        </div>
+                        <div class="d-flex flex-column gap-2">
+                            <button class="btn btn-primary" onclick="generatePrompt()">
+                                <i class="fas fa-magic me-2"></i>Generate Prompt
+                            </button>
+                            <button class="btn btn-success" onclick="copyPrompt()">
+                                <i class="fas fa-copy me-2"></i>Copy Prompt
+                            </button>
+                        </div>
+
+                        <!-- Preset Parameters Section -->
+                        <div class="mt-4">
+                            <h6 class="card-title">Preset Parameters</h6>
+                            
+                            <!-- Standard Presets -->
+                            <div class="mb-3">
+                                <label class="form-label">Standard Presets</label>
+                                <div class="d-flex flex-column gap-2">
+                                    <button class="btn btn-outline-primary" onclick="loadPreset('anime')">
+                                        <i class="fas fa-paint-brush me-2"></i>Anime Style
+                                    </button>
+                                    <button class="btn btn-outline-primary" onclick="loadPreset('realistic')">
+                                        <i class="fas fa-camera me-2"></i>Realistic Style
+                                    </button>
+                                    <button class="btn btn-outline-primary" onclick="loadPreset('fantasy')">
+                                        <i class="fas fa-dragon me-2"></i>Fantasy Style
+                                    </button>
+                                    <button class="btn btn-outline-primary" onclick="loadPreset('sci-fi')">
+                                        <i class="fas fa-robot me-2"></i>Sci-Fi Style
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Custom Presets -->
+                            <div class="mb-3">
+                                <label class="form-label">Custom Presets</label>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="presetName" placeholder="Preset name">
+                                    <button class="btn btn-outline-success" onclick="savePreset()">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </div>
+                                <div id="savedPresets" class="d-flex flex-column gap-2">
+                                    <!-- Saved presets will be loaded here -->
+                                </div>
+                            </div>
+
+                            <!-- Preset Management -->
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-secondary flex-grow-1" onclick="loadPresets()">
+                                    <i class="fas fa-sync me-2"></i>Refresh
+                                </button>
+                                <button class="btn btn-outline-danger flex-grow-1" onclick="clearPresets()">
+                                    <i class="fas fa-trash me-2"></i>Clear All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
