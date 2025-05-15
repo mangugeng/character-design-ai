@@ -1,53 +1,93 @@
 # Character Designer AI
 
-Aplikasi web untuk membantu mendesain karakter dengan AI. Aplikasi ini memungkinkan pengguna untuk membuat prompt yang detail untuk menghasilkan gambar karakter menggunakan AI.
+A comprehensive web application for designing characters with AI. This tool helps users create detailed prompts for generating character images using AI image generators like Midjourney, DALL-E, or Stable Diffusion.
 
-## Fitur
+## Features
 
-- Form parameter karakter yang lengkap
-- Generasi prompt otomatis
-- Penyimpanan preset
-- Manajemen preset (simpan, muat, hapus)
-- Antarmuka yang responsif
+- Complete character parameter customization
+- Detailed sub-race/ethnicity options for human characters
+- Automatic prompt generation
+- Multiple prompt styles (detailed, concise, artistic)
+- Preset characters for quick starting points
+- Preset management (save, load, delete, favorite)
+- Responsive user interface
+- Individual left/right arm, hand, and leg posing
 
-## Teknologi
+## Preset Characters
+
+The application comes with several pre-configured character presets in various styles:
+- Fantasy Warrior
+- Sci-Fi Engineer
+- Magical Elf
+- Cyberpunk Hacker
+- Desert Nomad
+- Steampunk Inventor
+- Modern Detective
+- Anime Hero
+- Forest Druid
+- Space Marine
+
+## Technologies
 
 - Next.js 14
 - React 18
 - TypeScript
-- CSS Modules
+- CSS
 
-## Instalasi
+## Installation
 
-1. Clone repositori ini
-2. Install dependensi:
+1. Clone this repository
+   ```bash
+   git clone https://github.com/mangugeng/character-design-ai.git
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Jalankan server development:
+3. Run the development server:
    ```bash
    npm run dev
    ```
-4. Buka [http://localhost:3000](http://localhost:3000) di browser Anda
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Penggunaan
+## Usage
 
-1. Isi form parameter karakter sesuai kebutuhan
-2. Klik tombol "Generate Prompt" untuk menghasilkan prompt
-3. Salin prompt yang dihasilkan
-4. Gunakan prompt tersebut di aplikasi AI image generator favorit Anda
+1. Fill in the character parameters according to your needs
+2. Enable "Auto-generate" to see the prompt update in real-time, or click "Generate Prompt"
+3. Select a prompt style (detailed, concise, artistic)
+4. Copy the generated prompt
+5. Use the prompt in your favorite AI image generator
 
-## Preset
+## Parameter Categories
 
-Anda dapat menyimpan konfigurasi karakter sebagai preset untuk digunakan kembali di masa mendatang:
+The application includes detailed parameter settings for:
 
-1. Isi form parameter sesuai kebutuhan
-2. Masukkan nama preset
-3. Klik tombol "Save Preset"
-4. Preset akan muncul di daftar preset
-5. Gunakan tombol "Load" untuk memuat preset yang tersimpan
-6. Gunakan tombol "Delete" untuk menghapus preset yang tidak diperlukan
+- Basic Info (name, gender, age, body type)
+- Race (category, race, sub-race/ethnicity, features)
+- Body (height, build, skin tone, scars, tattoos)
+- Head (shape, hair, face features, accessories)
+- Clothing (style, upper/lower body, accessories)
+- Pose (stance, arm/hand/leg positions, expression)
+- Style (art style, rendering, lighting)
+- Camera (layout, composition, effects)
+- Background (type, color, environment)
 
-## Lisensi
+## Preset Management
+
+You can save character configurations as presets for future use:
+
+1. Configure your character parameters
+2. Click "Save as Preset"
+3. Enter preset name, category, and tags
+4. Click "Save"
+5. Use the "Load" button to load a saved preset
+6. Use the "Delete" button to remove unwanted presets
+7. Mark your favorite presets with the star icon
+
+## Live Demo
+
+Visit the live application at: https://karakter-designer-a73owgzaf-mang-ugengs-projects.vercel.app/
+
+## License
 
 MIT 
