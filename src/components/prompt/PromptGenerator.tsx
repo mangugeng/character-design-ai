@@ -300,6 +300,22 @@ function generatePromptFromParameters(parameters: CharacterParameters, style: st
       prompt += `${parameters.camera.composition} composition. `;
     }
     
+    if (parameters.camera.cameraAngle) {
+      prompt += `${parameters.camera.cameraAngle} camera angle. `;
+    }
+    
+    if (parameters.camera.lensSize) {
+      prompt += `${parameters.camera.lensSize} lens. `;
+    }
+    
+    if (parameters.camera.cameraBrand && parameters.camera.cameraType) {
+      prompt += `Shot on ${parameters.camera.cameraBrand} ${parameters.camera.cameraType} camera. `;
+    } else if (parameters.camera.cameraBrand) {
+      prompt += `Shot on ${parameters.camera.cameraBrand} camera. `;
+    } else if (parameters.camera.cameraType) {
+      prompt += `Shot on ${parameters.camera.cameraType} camera. `;
+    }
+    
     if (parameters.camera.effects && parameters.camera.effects.length > 0) {
       prompt += `Camera effects: ${parameters.camera.effects.join(', ')}. `;
     }

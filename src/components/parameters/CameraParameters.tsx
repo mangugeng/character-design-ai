@@ -32,7 +32,51 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   const compositionOptions = [
     { value: 'centered', label: translations.center, icon: '🎯' },
     { value: 'rule of thirds', label: translations.rule_of_thirds, icon: '📐' },
-    { value: 'golden ratio', label: translations.golden_ratio, icon: '📏' }
+    { value: 'golden ratio', label: translations.golden_ratio, icon: '📏' },
+    { value: 'diagonal', label: translations.diagonal, icon: '↗️' },
+    { value: 'triangle', label: translations.triangle, icon: '🔺' },
+    { value: 'symmetrical', label: translations.symmetrical, icon: '↔️' },
+    { value: 'framing', label: translations.framing, icon: '🖼️' },
+    { value: 'leading lines', label: translations.leadingLines, icon: '➡️' }
+  ];
+
+  const cameraAngleOptions = [
+    { value: 'long shot', label: translations.longShot, icon: '🏞️' },
+    { value: 'medium shot', label: translations.mediumShot, icon: '👤' },
+    { value: 'close-up', label: translations.closeUp, icon: '👁️' },
+    { value: 'extreme close-up', label: translations.extremeCloseUp, icon: '🔍' },
+    { value: 'bird\'s eye view', label: translations.birdEyeView, icon: '🦅' },
+    { value: 'low angle', label: translations.lowAngle, icon: '⬆️' },
+    { value: 'dutch angle', label: translations.dutchAngle, icon: '↗️' },
+    { value: 'over the shoulder', label: translations.overTheShoulder, icon: '👥' }
+  ];
+
+  const lensSizeOptions = [
+    { value: 'wide angle', label: translations.wideAngle, icon: '📷' },
+    { value: 'standard', label: translations.standard, icon: '📷' },
+    { value: 'telephoto', label: translations.telephoto, icon: '📸' },
+    { value: 'macro', label: translations.macro, icon: '🔎' },
+    { value: 'fisheye', label: translations.fisheye, icon: '👁️' },
+    { value: 'prime', label: translations.prime, icon: '📷' },
+    { value: 'zoom', label: translations.zoom, icon: '🔭' }
+  ];
+
+  const cameraBrandOptions = [
+    { value: 'canon', label: translations.canon, icon: '📷' },
+    { value: 'nikon', label: translations.nikon, icon: '📷' },
+    { value: 'sony', label: translations.sony, icon: '📷' },
+    { value: 'fujifilm', label: translations.fujifilm, icon: '📷' },
+    { value: 'leica', label: translations.leica, icon: '📷' },
+    { value: 'hasselblad', label: translations.hasselblad, icon: '📷' }
+  ];
+
+  const cameraTypeOptions = [
+    { value: 'dslr', label: translations.dslr, icon: '📷' },
+    { value: 'mirrorless', label: translations.mirrorless, icon: '📸' },
+    { value: 'point and shoot', label: translations.pointAndShoot, icon: '📸' },
+    { value: 'analog', label: translations.analog, icon: '📷' },
+    { value: 'smartphone', label: translations.smartphone, icon: '📱' },
+    { value: 'medium format', label: translations.mediumFormat, icon: '📷' }
   ];
 
   const effectOptions = [
@@ -93,7 +137,6 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
     <div className="camera-parameters">
       <div className="form-section">
       
-
         {renderOptionSection(
           translations.layoutType,
           layoutOptions,
@@ -106,6 +149,34 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
           compositionOptions,
           { value: parameters.composition, label: parameters.composition, icon: '🎨' },
           (value) => handleChange('composition', value.value)
+        )}
+
+        {renderOptionSection(
+          translations.cameraAngle,
+          cameraAngleOptions,
+          { value: parameters.cameraAngle || 'medium shot', label: parameters.cameraAngle || 'Medium Shot', icon: '📷' },
+          (value) => handleChange('cameraAngle', value.value)
+        )}
+
+        {renderOptionSection(
+          translations.lensSize,
+          lensSizeOptions,
+          { value: parameters.lensSize || 'standard', label: parameters.lensSize || 'Standard', icon: '📷' },
+          (value) => handleChange('lensSize', value.value)
+        )}
+
+        {renderOptionSection(
+          translations.cameraBrand,
+          cameraBrandOptions,
+          { value: parameters.cameraBrand || 'canon', label: parameters.cameraBrand || 'Canon', icon: '📷' },
+          (value) => handleChange('cameraBrand', value.value)
+        )}
+
+        {renderOptionSection(
+          translations.cameraType,
+          cameraTypeOptions,
+          { value: parameters.cameraType || 'dslr', label: parameters.cameraType || 'DSLR', icon: '📷' },
+          (value) => handleChange('cameraType', value.value)
         )}
 
         {renderEffectsSection()}

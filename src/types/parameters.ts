@@ -108,6 +108,10 @@ export interface CameraParameters {
   layout: string;
   composition: string;
   effects: string[];
+  cameraAngle: string;
+  lensSize: string;
+  cameraType: string;
+  cameraBrand: string;
 }
 
 export interface BackgroundParameters {
@@ -218,6 +222,9 @@ export interface Preset {
     cameraTreatment: string;
     cameraEffects: string[];
     lighting: string;
+    lensSize: string;
+    cameraBrand: string;
+    cameraType: string;
   };
   background: {
     type: string;
@@ -296,10 +303,13 @@ export const defaultPreset: Preset = {
     layout: 'portrait',
     aspectRatio: '3:4',
     screenSize: '1080p',
-    cameraAngle: 'front view',
+    cameraAngle: 'medium shot',
     cameraTreatment: 'medium shot',
     cameraEffects: [],
-    lighting: 'natural lighting'
+    lighting: 'natural lighting',
+    lensSize: 'standard',
+    cameraBrand: 'canon',
+    cameraType: 'dslr'
   },
   background: {
     type: 'solid color',
