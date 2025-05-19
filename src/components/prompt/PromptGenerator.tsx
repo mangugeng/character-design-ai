@@ -70,7 +70,8 @@ const defaultPresets: PromptPreset[] = [
 ];
 
 // Helper function to generate prompt from parameters
-function generatePromptFromParameters(parameters: CharacterParameters, style: string): string {
+function generatePromptFromParameters(parameters: CharacterParameters, style: string, language: 'en' | 'id' = 'en'): string {
+  const translations = language === 'en' ? enTranslations : idTranslations;
   const hasValue = (obj: any) => obj && obj.value && obj.value !== 'none';
   
   // Start with character basics
@@ -160,7 +161,7 @@ function generatePromptFromParameters(parameters: CharacterParameters, style: st
     }
   }
   
-  // Clothing details - more detailed for the "detailed" style
+  // Clothing details
   if (parameters.clothing) {
     prompt += 'Wearing ';
     
@@ -255,33 +256,41 @@ function generatePromptFromParameters(parameters: CharacterParameters, style: st
     }
   }
   
-  // Art style information - tailored based on prompt style selection
+  // Style information
   if (parameters.style) {
     let styleInfo = '';
     
     // Art style
-    if (hasValue(parameters.style.artStyle)) {
-      styleInfo += `${parameters.style.artStyle.label} art style, `;
+    if (parameters.style.artStyle) {
+      const artStyleLabel = translations[parameters.style.artStyle] || parameters.style.artStyle;
+      styleInfo += `${artStyleLabel} art style, `;
     }
     
     // Rendering
-    if (hasValue(parameters.style.rendering)) {
-      styleInfo += `${parameters.style.rendering.label} rendering, `;
+    if (parameters.style.rendering) {
+      const renderingLabel = translations[parameters.style.rendering] || parameters.style.rendering;
+      styleInfo += `${renderingLabel} rendering, `;
     }
     
     // Lighting
-    if (hasValue(parameters.style.lighting)) {
-      styleInfo += `${parameters.style.lighting.label} lighting, `;
+    if (parameters.style.lighting) {
+      const lightingLabel = translations[parameters.style.lighting] || parameters.style.lighting;
+      styleInfo += `${lightingLabel} lighting, `;
     }
     
     // Mood
-    if (hasValue(parameters.style.mood)) {
-      styleInfo += `${parameters.style.mood.label} mood, `;
+    if (parameters.style.mood) {
+      styleInfo += `${parameters.style.mood} mood, `;
     }
     
     // Color Palette
-    if (hasValue(parameters.style.colorPalette)) {
-      styleInfo += `${parameters.style.colorPalette.label} color palette, `;
+    if (parameters.style.colorPalette) {
+      styleInfo += `${parameters.style.colorPalette} color palette, `;
+    }
+
+    // 3D Software
+    if (parameters.style.software) {
+      styleInfo += `created in ${parameters.style.software}, `;
     }
     
     if (styleInfo) {
@@ -405,7 +414,7 @@ export const PromptGenerator: React.FC<PromptGeneratorProps> = ({ parameters, la
 
   // Generate prompt based on parameters and style
   const generatePrompt = () => {
-    const prompt = generatePromptFromParameters(parameters, promptStyle);
+    const prompt = generatePromptFromParameters(parameters, promptStyle, language);
     setPromptText(prompt);
   };
 

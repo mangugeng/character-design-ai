@@ -160,7 +160,7 @@ export const PoseParameters: React.FC<PoseParametersProps> = ({
   ];
 
   const expressionOptions = [
-    { value: 'neutral', label: translations.neutral, icon: '😐' },
+    { value: 'neutral', label: language === 'en' ? 'Neutral' : 'Netral', icon: '😐' },
     { value: 'happy', label: language === 'en' ? 'Happy' : 'Bahagia', icon: '😊' },
     { value: 'sad', label: language === 'en' ? 'Sad' : 'Sedih', icon: '😢' },
     { value: 'angry', label: translations.angry, icon: '😠' },

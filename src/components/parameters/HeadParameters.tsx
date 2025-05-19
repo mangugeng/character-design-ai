@@ -33,7 +33,7 @@ export const HeadParameters: React.FC<HeadParametersProps> = ({
 
   const hairStyleOptions = [
     { value: 'short', label: translations.short, icon: '✂️' },
-    { value: 'medium', label: translations.medium, icon: '💇' },
+    { value: 'medium', label: translations.mediumLength, icon: '💇' },
     { value: 'long', label: translations.long, icon: '💇‍♀️' },
     { value: 'curly', label: translations.curly, icon: '🔄' },
     { value: 'wavy', label: translations.wavy, icon: '🌊' }

@@ -1,93 +1,121 @@
-# Character Designer AI
+# Karakter Designer AI
 
-A comprehensive web application for designing characters with AI. This tool helps users create detailed prompts for generating character images using AI image generators like Midjourney, DALL-E, or Stable Diffusion.
+Aplikasi web untuk mendesain karakter menggunakan AI dengan berbagai parameter kustomisasi.
 
-## Features
+## Fitur Utama
 
-- Complete character parameter customization
-- Detailed sub-race/ethnicity options for human characters
-- Automatic prompt generation
-- Multiple prompt styles (detailed, concise, artistic)
-- Preset characters for quick starting points
-- Preset management (save, load, delete, favorite)
-- Responsive user interface
-- Individual left/right arm, hand, and leg posing
+- 🎨 Kustomisasi Karakter
+  - Pose dan Ekspresi
+  - Pakaian dan Aksesoris
+  - Gaya Rambut
+  - Warna dan Material
 
-## Preset Characters
+- 📸 Parameter Kamera
+  - Layout dan Komposisi
+  - Sudut Kamera
+  - Ukuran Lensa
+  - Efek Khusus
 
-The application comes with several pre-configured character presets in various styles:
-- Fantasy Warrior
-- Sci-Fi Engineer
-- Magical Elf
-- Cyberpunk Hacker
-- Desert Nomad
-- Steampunk Inventor
-- Modern Detective
-- Anime Hero
-- Forest Druid
-- Space Marine
+- 🎭 Gaya Visual
+  - Gaya Seni (Realistis, Kartun, Anime, dll)
+  - Teknik Rendering
+  - Pencahayaan
+  - Mood dan Atmosfer
 
-## Technologies
+- 🌈 Kustomisasi Warna
+  - Palet Warna
+  - Kontras
+  - Saturasi
+  - Efek Warna
+
+## Teknologi yang Digunakan
 
 - Next.js 14
-- React 18
 - TypeScript
-- CSS
+- Tailwind CSS
+- Vercel AI SDK
+- OpenAI API
 
-## Installation
+## Persyaratan Sistem
 
-1. Clone this repository
-   ```bash
-   git clone https://github.com/mangugeng/character-design-ai.git
-   ```
+- Node.js 18.0.0 atau lebih baru
+- npm 9.0.0 atau lebih baru
+- API key OpenAI
+
+## Instalasi
+
+1. Clone repository:
+```bash
+git clone https://github.com/yourusername/karakter-designer-ai.git
+cd karakter-designer-ai
+```
+
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+```bash
+npm install
+```
 
-## Usage
+3. Buat file `.env.local` dan tambahkan API key OpenAI:
+```
+OPENAI_API_KEY=your_api_key_here
+```
 
-1. Fill in the character parameters according to your needs
-2. Enable "Auto-generate" to see the prompt update in real-time, or click "Generate Prompt"
-3. Select a prompt style (detailed, concise, artistic)
-4. Copy the generated prompt
-5. Use the prompt in your favorite AI image generator
+4. Jalankan development server:
+```bash
+npm run dev
+```
 
-## Parameter Categories
+5. Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-The application includes detailed parameter settings for:
+## Deployment
 
-- Basic Info (name, gender, age, body type)
-- Race (category, race, sub-race/ethnicity, features)
-- Body (height, build, skin tone, scars, tattoos)
-- Head (shape, hair, face features, accessories)
-- Clothing (style, upper/lower body, accessories)
-- Pose (stance, arm/hand/leg positions, expression)
-- Style (art style, rendering, lighting)
-- Camera (layout, composition, effects)
-- Background (type, color, environment)
+Aplikasi ini di-deploy menggunakan Vercel:
 
-## Preset Management
+1. Build aplikasi:
+```bash
+npm run build
+```
 
-You can save character configurations as presets for future use:
+2. Deploy ke production:
+```bash
+vercel --prod
+```
 
-1. Configure your character parameters
-2. Click "Save as Preset"
-3. Enter preset name, category, and tags
-4. Click "Save"
-5. Use the "Load" button to load a saved preset
-6. Use the "Delete" button to remove unwanted presets
-7. Mark your favorite presets with the star icon
+## Struktur Proyek
 
-## Live Demo
+```
+src/
+├── app/                 # Next.js app directory
+├── components/         # React components
+│   ├── parameters/    # Parameter components
+│   └── ui/           # UI components
+├── types/            # TypeScript types
+├── translations/     # Translation files
+└── utils/           # Utility functions
+```
 
-Visit the live application at: https://karakter-designer-a73owgzaf-mang-ugengs-projects.vercel.app/
+## Penggunaan
 
-## License
+1. Pilih parameter karakter yang diinginkan
+2. Sesuaikan gaya visual dan pencahayaan
+3. Atur parameter kamera
+4. Klik "Generate" untuk membuat karakter
+5. Download hasil atau generate ulang dengan parameter berbeda
 
-MIT 
+## Kontribusi
+
+1. Fork repository
+2. Buat branch fitur baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+## Lisensi
+
+Distribusikan di bawah lisensi MIT. Lihat `LICENSE` untuk informasi lebih lanjut.
+
+## Kontak
+
+Sugeng Hariadi - [@mang_ugengs](https://twitter.com/mang_ugengs)
+
+Link Proyek: [https://github.com/yourusername/karakter-designer-ai](https://github.com/yourusername/karakter-designer-ai) 

@@ -24,12 +24,14 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   };
 
   const layoutOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'portrait', label: translations.portraitLayout, icon: '📱' },
     { value: 'landscape', label: translations.landscape, icon: '🖼️' },
     { value: 'square', label: translations.squareLayout, icon: '⬛' }
   ];
 
   const compositionOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'centered', label: translations.center, icon: '🎯' },
     { value: 'rule of thirds', label: translations.rule_of_thirds, icon: '📐' },
     { value: 'golden ratio', label: translations.golden_ratio, icon: '📏' },
@@ -41,6 +43,7 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   ];
 
   const cameraAngleOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'long shot', label: translations.longShot, icon: '🏞️' },
     { value: 'medium shot', label: translations.mediumShot, icon: '👤' },
     { value: 'close-up', label: translations.closeUp, icon: '👁️' },
@@ -52,6 +55,7 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   ];
 
   const lensSizeOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'wide angle', label: translations.wideAngle, icon: '📷' },
     { value: 'standard', label: translations.standard, icon: '📷' },
     { value: 'telephoto', label: translations.telephoto, icon: '📸' },
@@ -62,24 +66,27 @@ export const CameraParameters: React.FC<CameraParametersProps> = ({
   ];
 
   const cameraBrandOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'canon', label: translations.canon, icon: '📷' },
     { value: 'nikon', label: translations.nikon, icon: '📷' },
-    { value: 'sony', label: translations.sony, icon: '📷' },
+    { value: 'sony', label: translations.sonyCamera, icon: '📷' },
     { value: 'fujifilm', label: translations.fujifilm, icon: '📷' },
     { value: 'leica', label: translations.leica, icon: '📷' },
     { value: 'hasselblad', label: translations.hasselblad, icon: '📷' }
   ];
 
   const cameraTypeOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'dslr', label: translations.dslr, icon: '📷' },
     { value: 'mirrorless', label: translations.mirrorless, icon: '📸' },
     { value: 'point and shoot', label: translations.pointAndShoot, icon: '📸' },
-    { value: 'analog', label: translations.analog, icon: '📷' },
+    { value: 'analog', label: translations.analogCamera, icon: '📷' },
     { value: 'smartphone', label: translations.smartphone, icon: '📱' },
     { value: 'medium format', label: translations.mediumFormat, icon: '📷' }
   ];
 
   const effectOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'blur', label: language === 'en' ? 'Blur' : 'Blur', icon: '🌫️' },
     { value: 'vignette', label: language === 'en' ? 'Vignette' : 'Vignette', icon: '⭕' },
     { value: 'grain', label: language === 'en' ? 'Grain' : 'Bintik', icon: '🎞️' },

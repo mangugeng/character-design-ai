@@ -56,7 +56,7 @@ export const idTranslations = {
   hair: 'Rambut',
   hairStyle: 'Gaya Rambut',
   short: 'Pendek',
-  medium: 'Sedang',
+  mediumLength: 'Sedang',
   long: 'Panjang',
   curly: 'Keriting',
   wavy: 'Bergelombang',
@@ -176,7 +176,7 @@ export const idTranslations = {
   tilted: 'Miring',
   turned: 'Berputar',
   expression: 'Ekspresi',
-  neutral: 'Netral',
+  neutralLight: 'Netral',
   smiling: 'Tersenyum',
   serious: 'Serius',
   angry: 'Marah',
@@ -194,8 +194,8 @@ export const idTranslations = {
   lighting: 'Pencahayaan',
   soft: 'Lembut',
   hard: 'Keras',
-  dramatic: 'Dramatis',
-  natural: 'Alami',
+  dramaticLight: 'Dramatis',
+  naturalLight: 'Alami',
   
   // Camera Parameters
   cameraDetails: 'Detail Kamera',
@@ -233,7 +233,7 @@ export const idTranslations = {
   cameraBrand: 'Merek Kamera',
   canon: 'Canon',
   nikon: 'Nikon',
-  sony: 'Sony',
+  sonyCamera: 'Sony',
   fujifilm: 'Fujifilm',
   leica: 'Leica',
   hasselblad: 'Hasselblad',
@@ -241,7 +241,7 @@ export const idTranslations = {
   dslr: 'DSLR',
   mirrorless: 'Mirrorless',
   pointAndShoot: 'Point and Shoot',
-  analog: 'Analog',
+  analogCamera: 'Analog',
   smartphone: 'Smartphone',
   mediumFormat: 'Format Menengah',
   
@@ -249,12 +249,12 @@ export const idTranslations = {
   backgroundDetails: 'Detail Latar Belakang',
   backgroundType: 'Tipe Latar Belakang',
   plain: 'Polos',
-  gradient: 'Gradien',
+  gradientBg: 'Gradien',
   environmentType: 'Lingkungan',
-  indoor: 'Dalam Ruangan',
-  outdoor: 'Luar Ruangan',
-  urban: 'Perkotaan',
-  nature: 'Alam',
+  indoorScene: 'Dalam Ruangan',
+  outdoorScene: 'Luar Ruangan',
+  urbanScene: 'Perkotaan',
+  natureScene: 'Alam',
   
   // Prompt Generator
   promptGenerator: 'Generator Prompt',
@@ -304,5 +304,5 @@ export const idTranslations = {
   // Language
   language: 'Bahasa',
   english: 'Inggris',
-  indonesian: 'Indonesia',
+  indonesian: 'Indonesia'
 }; 

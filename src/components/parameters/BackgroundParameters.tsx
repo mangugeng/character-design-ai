@@ -21,13 +21,15 @@ export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({
   };
 
   const typeOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'solid color', label: language === 'en' ? 'Solid Color' : 'Warna Solid', icon: '🎨' },
-    { value: 'gradient', label: translations.gradient, icon: '🌈' },
+    { value: 'gradient', label: translations.gradientBg, icon: '🌈' },
     { value: 'pattern', label: language === 'en' ? 'Pattern' : 'Pola', icon: '🔲' },
     { value: 'image', label: language === 'en' ? 'Image' : 'Gambar', icon: '🖼️' }
   ];
 
   const colorOptions = [
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
     { value: 'white', label: language === 'en' ? 'White' : 'Putih', icon: '⚪' },
     { value: 'black', label: language === 'en' ? 'Black' : 'Hitam', icon: '⚫' },
     { value: 'gray', label: language === 'en' ? 'Gray' : 'Abu-abu', icon: '⚫' },
@@ -39,10 +41,11 @@ export const BackgroundParameters: React.FC<BackgroundParametersProps> = ({
   ];
 
   const environmentOptions = [
-    { value: 'indoor', label: translations.indoor, icon: '🏠' },
-    { value: 'outdoor', label: translations.outdoor, icon: '🌳' },
-    { value: 'urban', label: translations.urban, icon: '🌆' },
-    { value: 'nature', label: translations.nature, icon: '🌲' },
+    { value: 'none', label: language === 'en' ? 'None' : 'Tidak Ada', icon: '❌' },
+    { value: 'indoor', label: translations.indoorScene, icon: '🏠' },
+    { value: 'outdoor', label: translations.outdoorScene, icon: '🌳' },
+    { value: 'urban', label: translations.urbanScene, icon: '🏙️' },
+    { value: 'nature', label: translations.natureScene, icon: '🌲' },
     { value: 'abstract', label: language === 'en' ? 'Abstract' : 'Abstrak', icon: '🎨' }
   ];
 

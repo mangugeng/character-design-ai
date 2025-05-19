@@ -97,11 +97,12 @@ export interface PoseParameters {
 }
 
 export interface StyleParameters {
-  artStyle: Option;
-  rendering: Option;
-  lighting: Option;
-  mood?: Option;
-  colorPalette?: Option;
+  artStyle?: string;
+  rendering?: string;
+  lighting?: string;
+  mood?: string;
+  colorPalette?: string;
+  software?: string;
 }
 
 export interface CameraParameters {
@@ -260,7 +261,7 @@ export const defaultPreset: Preset = {
   body: {
     proportions: 'average',
     features: [],
-    skinTone: 'medium'
+    skinTone: 'mediumTone'
   },
   clothing: {
     style: { value: 'casual', label: 'Casual', icon: '👕' },
@@ -303,10 +304,10 @@ export const defaultPreset: Preset = {
     layout: 'portrait',
     aspectRatio: '3:4',
     screenSize: '1080p',
-    cameraAngle: 'medium shot',
-    cameraTreatment: 'medium shot',
+    cameraAngle: 'mediumShot',
+    cameraTreatment: 'mediumShot',
     cameraEffects: [],
-    lighting: 'natural lighting',
+    lighting: 'naturalLight',
     lensSize: 'standard',
     cameraBrand: 'canon',
     cameraType: 'dslr'

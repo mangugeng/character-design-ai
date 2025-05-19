@@ -102,6 +102,7 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
               value={parameters.style?.value || 'casual'} 
               onChange={(e) => handleChangeStyle(e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="casual">{translations.casual}</option>
               <option value="formal">{translations.formal}</option>
               <option value="sporty">{translations.sporty}</option>
@@ -118,6 +119,7 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
               value={parameters.upperBody?.type?.value || 'shirt'} 
               onChange={(e) => handleChangeUpperBody('type', e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="shirt">{translations.shirt}</option>
               <option value="t-shirt">{translations.tShirt}</option>
               <option value="blouse">{translations.blouse}</option>
@@ -132,6 +134,7 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
               value={parameters.upperBody?.color?.value || 'blue'} 
               onChange={(e) => handleChangeUpperBody('color', e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="blue">{translations.blueColor}</option>
               <option value="red">{translations.redColor}</option>
               <option value="green">{translations.greenColor}</option>
@@ -163,11 +166,12 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
           <div className="form-group">
             <label className="form-label">{translations.clothingType}</label>
             <select 
-              value={parameters.lowerBody?.type?.value || 'jeans'} 
+              value={parameters.lowerBody?.type?.value || 'pants'} 
               onChange={(e) => handleChangeLowerBody('type', e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
-              <option value="jeans">{translations.jeans}</option>
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="pants">{translations.pants}</option>
+              <option value="jeans">{translations.jeans}</option>
               <option value="shorts">{translations.shorts}</option>
               <option value="skirt">{translations.skirt}</option>
               <option value="dress">{translations.dress}</option>
@@ -180,11 +184,12 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
               value={parameters.lowerBody?.color?.value || 'blue'} 
               onChange={(e) => handleChangeLowerBody('color', e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="blue">{translations.blueColor}</option>
               <option value="black">{translations.blackColor}</option>
-              <option value="brown">{translations.brownColor}</option>
-              <option value="grey">{translations.gray}</option>
               <option value="white">{translations.whiteColor}</option>
+              <option value="gray">{translations.gray}</option>
+              <option value="brown">{translations.brownColor}</option>
             </select>
           </div>
           
@@ -211,6 +216,7 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
               value={parameters.footwear?.type?.value || 'sneakers'} 
               onChange={(e) => handleChangeFootwear('type', e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="sneakers">{translations.sneakers}</option>
               <option value="boots">{translations.boots}</option>
               <option value="sandals">{translations.sandals}</option>
@@ -224,6 +230,7 @@ export const ClothingParameters: React.FC<ClothingParametersProps> = ({
               value={parameters.footwear?.color?.value || 'black'} 
               onChange={(e) => handleChangeFootwear('color', e.target.value, e.target.options[e.target.selectedIndex].text)}
             >
+              <option value="none">{language === 'en' ? 'None' : 'Tidak Ada'}</option>
               <option value="black">{translations.blackColor}</option>
               <option value="white">{translations.whiteColor}</option>
               <option value="brown">{translations.brownColor}</option>

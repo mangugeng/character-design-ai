@@ -37,12 +37,12 @@ function App() {
         hair: {
           style: 'short',
           color: 'black',
-          length: 'medium'
+          length: 'mediumLength'
         },
         face: {
           eyes: 'round',
           nose: 'straight',
-          mouth: 'neutral',
+          mouth: 'neutralLight',
           ears: 'normal'
         },
         accessories: []
@@ -191,36 +191,28 @@ function App() {
         },
         expression: { 
           value: 'neutral', 
-          label: lang === 'en' ? t.neutral : t.neutral, 
+          label: lang === 'en' ? 'Neutral' : 'Netral', 
           icon: '😐' 
         }
       },
       style: {
-        artStyle: { 
-          value: 'realistic', 
-          label: lang === 'en' ? t.realistic : t.realistic, 
-          icon: '🖼️' 
-        },
-        rendering: { 
-          value: 'detailed', 
-          label: lang === 'en' ? t.detailedRender : t.detailedRender, 
-          icon: '✨' 
-        },
-        lighting: { 
-          value: 'soft', 
-          label: lang === 'en' ? t.soft : t.soft, 
-          icon: '💡' 
-        }
+        artStyle: 'realistic',
+        rendering: 'detailed',
+        lighting: 'naturalLight'
       },
       camera: {
         layout: 'portrait',
         composition: 'center',
-        effects: []
+        effects: [],
+        cameraAngle: 'mediumShot',
+        lensSize: 'standard',
+        cameraType: 'dslr',
+        cameraBrand: 'canon'
       },
       background: {
         type: 'plain',
         color: 'white',
-        environment: 'neutral'
+        environment: 'neutralLight'
       }
     };
   };
@@ -290,18 +282,18 @@ function App() {
       updatedParams.pose.headPosition.label = translations.forward;
     }
     if (updatedParams.pose?.expression) {
-      updatedParams.pose.expression.label = translations.neutral;
+      updatedParams.pose.expression.label = language === 'en' ? 'Neutral' : 'Netral';
     }
     
     // Update style labels
     if (updatedParams.style?.artStyle) {
-      updatedParams.style.artStyle.label = translations.realistic;
+      updatedParams.style.artStyle = language === 'en' ? 'Realistic' : 'Realistis';
     }
     if (updatedParams.style?.rendering) {
-      updatedParams.style.rendering.label = translations.detailedRender;
+      updatedParams.style.rendering = language === 'en' ? 'Detailed' : 'Detail';
     }
     if (updatedParams.style?.lighting) {
-      updatedParams.style.lighting.label = translations.soft;
+      updatedParams.style.lighting = language === 'en' ? 'Soft' : 'Lembut';
     }
     
     setParameters(updatedParams);
